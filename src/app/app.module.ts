@@ -12,6 +12,8 @@ import { BuchungfindenComponent } from './buchungfinden/buchungfinden.component'
 import { BuchungBearbeitenComponent } from './buchung-bearbeiten/buchung-bearbeiten.component';
 import { BuchungStornierenComponent } from './buchung-stornieren/buchung-stornieren.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const meineRouten: Routes = [
 {path: "neueBuchung", component: NeueBuchungComponent},// Slashes setzt der automatisch
@@ -39,6 +41,8 @@ const meineRouten: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

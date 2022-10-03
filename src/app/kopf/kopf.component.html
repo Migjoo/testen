@@ -1,16 +1,8 @@
-<mat-tab-group animationDuration="0ms">
-    <mat-tab label="Buchung hinzufügen"> <a routerLink="/neueBuchung"> hinzufügen </a></mat-tab>
-    <mat-tab label="Buchungsübersicht"> Buchungsübersicht </mat-tab>
-    <mat-tab label="Buchung bearbeiten"> Buchung bearbeiten </mat-tab>
-    <mat-tab label="Buchung stornieren"> Buchung stornieren </mat-tab>
-    <mat-tab label="Buchung suchen"> Buchung suchen </mat-tab>
-</mat-tab-group>
-<a routerLink="/neueBuchung">link to user component</a>
-<!--  {path: "neueBuchung", component: NeueBuchungComponent},// Slashes setzt der automatisch
-{path: "finden", component: BuchungfindenComponent},
-{path: "uebersicht", component: BuchungsuebersichtComponent},
-{path: "finden", component: BuchungfindenComponent},
-{path: "stornieren", component: BuchungStornierenComponent},
-{path: "", component: StartseiteComponent}, -->
-
-
+<nav mat-tab-nav-bar >
+    <img  width="120px" height="50px" src="/assets/logo.svg">
+    <a mat-tab-link routerLink="/neueBuchung" routerLinkActive="active-link">Buchung hinzufügen</a>
+    <a mat-tab-link routerLink="/uebersicht" routerLinkActive="active-link">Buchungsübersicht</a>
+    <a mat-tab-link routerLink="/bearbeiten" routerLinkActive="active-link">Buchung bearbeiten</a>
+    <a mat-tab-link routerLink="/stornieren" routerLinkActive="active-link">Buchung stornieren</a>
+    <a mat-tab-link routerLink="/finden" routerLinkActive="active-link">Buchung suchen</a>
+</nav>

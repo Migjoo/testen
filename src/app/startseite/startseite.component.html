@@ -1,0 +1,21 @@
+<h1>Willkommen in der Buchungsübersicht</h1>
+<h2>Bitte wählen Sie eine Aktion aus</h2>
+
+<h3>Neue Buchung</h3>
+
+<button (click)="weiterleiten('neueBuchung')">Neue Buchung</button>
+
+<h3>Buchungen anzeigen</h3>
+<button (click)="weiterleiten('uebersicht')">Buchungsübersicht</button>
+<h3>Buchungen bearbeiten</h3>
+<button (click)="weiterleiten('bearbeiten')">Buchung bearbeiten</button>
+<button (click)="weiterleiten('stornieren')">Buchung stornieren</button>
+<h3>Buchungen finden</h3>
+<button (click)="weiterleiten('finden')">Buchung stornieren</button>
+
+<!--  {path: "neueBuchung", component: NeueBuchungComponent},// Slashes setzt der automatisch
+{path: "finden", component: BuchungfindenComponent},
+{path: "uebersicht", component: BuchungsuebersichtComponent},
+{path: "finden", component: BuchungfindenComponent},
+{path: "stornieren", component: BuchungStornierenComponent},
+{path: "", component: StartseiteComponent}, -->

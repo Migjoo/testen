@@ -1,0 +1,32 @@
+Routing
+Wird über app.module.ts gemacht 
+
+
+
+App-Module Routing importieren
+import { RouterModule, Routes } from '@angular/router'; //Routes das Array mit den Routen, RouterModule der Service
+
+danach das array anlegen und befüllen
+
+
+const meineRouten: Routes = [
+{path: "neueBuchung", component: KopfComponent},// Slashes setzt der automatisch
+{path: "scheißen", component: FusszeileComponent},
+];//Array von Routen
+
+
+danach übergeben: 
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    KopfComponent,
+    FusszeileComponent,
+    StartseiteComponent
+  ],
+  imports: [
+    RouterModule.forRoot(meineRouten),
+    BrowserModule,
+    AppRoutingModule // hier
+  ],

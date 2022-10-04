@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KopfComponent } from './kopf/kopf.component';
-import { FusszeileComponent } from './fusszeile/fusszeile.component';
+
 import { StartseiteComponent } from './startseite/startseite.component';
 import { NeueBuchungComponent } from './neue-buchung/neue-buchung.component';
 import { BuchungsuebersichtComponent } from './buchungsuebersicht/buchungsuebersicht.component';
@@ -55,21 +55,23 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IgxStepperModule, IgxButtonModule, IgxButtonGroupModule } from "igniteui-angular";
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const meineRouten: Routes = [
-{path: "neueBuchung", component: NeueBuchungComponent},// Slashes setzt der automatisch
-{path: "finden", component: BuchungfindenComponent},
-{path: "uebersicht", component: BuchungsuebersichtComponent},
-{path: "bearbeiten", component: BuchungBearbeitenComponent},
-{path: "stornieren", component: BuchungStornierenComponent},
-{path: "", component: StartseiteComponent},
-];//Array von Routen
+  { path: "neueBuchung", component: NeueBuchungComponent },
+  { path: "finden", component: BuchungfindenComponent },
+  { path: "uebersicht", component: BuchungsuebersichtComponent },
+  { path: "bearbeiten", component: BuchungBearbeitenComponent },
+  { path: "stornieren", component: BuchungStornierenComponent },
+  { path: "", component: StartseiteComponent },
+]; //Array von Routen
 
 @NgModule({
   declarations: [
     AppComponent,
     KopfComponent,
-    FusszeileComponent,
     StartseiteComponent,
     NeueBuchungComponent,
     BuchungsuebersichtComponent,
@@ -120,9 +122,11 @@ const meineRouten: Routes = [
     MatTableModule,
     FormsModule,
     ReactiveFormsModule,
-
+    BrowserAnimationsModule,
+    IgxStepperModule, IgxButtonModule, IgxButtonGroupModule ,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

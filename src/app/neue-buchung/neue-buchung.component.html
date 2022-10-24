@@ -14,24 +14,23 @@
         </mat-radio-group>
         <br>
         <br>
-          <div class="sample-step-actions">    
-            <mat-form-field appearance="fill">
+          <div class="sample-step-actions">   
+             <mat-form-field appearance="fill">
                 <mat-label>Vorname</mat-label>
                 <input matInput placeholder="Vorname" formControlName="firstCtrl" required>
-              </mat-form-field> 
-              <br>
-              <mat-form-field appearance="fill">
+              </mat-form-field>
+              <mat-form-field appearance="fill" id="name">
                 <mat-label>Nachname</mat-label>
                 <input matInput placeholder="Nachname" formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" style= "width: 25%;">
                 <mat-label>Straße</mat-label>
                 <input matInput placeholder="Straße" formControlName="firstCtrl" required>
               </mat-form-field> 
-              <mat-form-field appearance="fill">
-                <mat-label>Hausnummer</mat-label>
-                <input matInput placeholder="Hausnummer" formControlName="firstCtrl" required>
+              <mat-form-field appearance="fill" style= "width: 6%;">
+                <mat-label>Nr.</mat-label>
+                <input matInput placeholder="Nr." formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill">
@@ -40,21 +39,50 @@
               </mat-form-field> 
               <mat-form-field appearance="fill">
                 <mat-label>Ort</mat-label>
-                <input matInput placeholder="Ort" formControlName="firstCtrl" required style="width:70%">
+                <input matInput placeholder="Ort" formControlName="firstCtrl" required>
+              </mat-form-field> 
+              <br>
+              <mat-form-field appearance="fill" style= "width: 25%;">
+                <mat-label>E-mail</mat-label>
+                <input matInput placeholder="E-mail" formControlName="firstCtrl" required >
+              </mat-form-field> 
+              <br>
+              <mat-form-field appearance="fill">
+                <mat-label>Telefon</mat-label>
+                <input matInput placeholder="Telefon" formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
               <button igxButton="raised" (click)="stepper.next()">NEXT</button>
           </div>
       </div>
   </igx-step>
+
+
+
+
   <igx-step>
       <span igxStepTitle>Ticketauswahl</span>
       <div igxStepContent>
-          <div class="sample-step-actions">
+          <div class="sample-step-actions">  
+            <mat-form-field appearance="fill" style="width: 35%;">
+                <mat-label>Ticketauswahl</mat-label>
+                <mat-select [formControl]="pokemonControl">
+                  <mat-option>-- None --</mat-option>
+                  <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
+                                [disabled]="group.disabled">
+                    <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+                      {{pokemon.viewValue}}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            <br>
               <button igxButton="raised" (click)="stepper.prev()">PREVIOUS</button>
               <button igxButton="raised" (click)="stepper.next()">NEXT</button>
           </div>
+         
       </div>
+    
   </igx-step>
   <igx-step>
       <span igxStepTitle>Zahlungsart</span>
@@ -76,4 +104,5 @@
         </div>
     </div>
 </igx-step>
+
 </igx-stepper>

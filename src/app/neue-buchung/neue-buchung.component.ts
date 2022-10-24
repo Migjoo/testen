@@ -1,6 +1,18 @@
 
 import { Component } from '@angular/core';
 import { IButtonGroupEventArgs } from 'igniteui-angular';
+import {FormControl} from '@angular/forms';
+
+interface Pokemon {
+  value: string;
+  viewValue: string;
+}
+
+interface PokemonGroup {
+  disabled?: boolean;
+  name: string;
+  pokemon: Pokemon[];
+}
 
 
 @Component({
@@ -9,8 +21,62 @@ import { IButtonGroupEventArgs } from 'igniteui-angular';
   styleUrls: ['./neue-buchung.component.scss']
 })
 export class NeueBuchungComponent{
-  public linear = false;
+  pokemonControl = new FormControl('');
+  pokemonGroups: PokemonGroup[] = [
+    {
+      name: 'kombitickets',
+      pokemon: [
+        {value:  "Kombiticket Treis", viewValue:  "Kombiticket Treis"},
+        {value: "Kombiticket Klotten", viewValue: "Kombiticket Klotten"},
+        {value: "Kombiticket Ellenz", viewValue: "Kombiticket Ellenz"},
+        {value: "Kombiticket Bullay", viewValue:  "Kombiticket Bullay"},
+        {value: "Kombiticket Lieser", viewValue: "Kombiticket Lieser"},
+        {value: "Kombiticket Kröv", viewValue: "Kombiticket Kröv"},
+        {value: "Kombiticket Enkirch", viewValue: "Kombiticket Enkirch"},
+        {value: "Kombiticket Koblenz-Winningen Fries", viewValue: "Kombiticket Koblenz-Winningen Fries"},
+        {value: "Kombiticket Koblenz-Winningen Knebel", viewValue: "Kombiticket Koblenz-Winningen Knebel"},
+      ],
+    },
+    {
+      name: '"Mit dem Kanu"',
+      pokemon: [
+        {value: "Mit dem Kanu zum Winzer Cochem", viewValue: "Mit dem Kanu zum Winzer Cochem"},
+        {value: "Mit dem Kanu zum Winzer Traben-Trarbach", viewValue: "Mit dem Kanu zum Winzer Traben-Trarbach"},
+      ],
+    },
+    {
+      name: 'Fahrrad-Picknick-Schifftour',
+      pokemon: [
+        {value: "Fahrrad-Picknick-Schifftour Cochem KD (Normale Räder)", viewValue: "Fahrrad-Picknick-Schifftour Cochem KD (Normale Räder)"},
+        {value: "Fahrrad-Picknick-Schifftour Cochem KD (E-Bikes)", viewValue: "Fahrrad-Picknick-Schifftour Cochem KD (E-Bikes)"},
+        {value: "Fahrrad-Picknick-Schifftour Cochem SW (Normale Räder)", viewValue: "Fahrrad-Picknick-Schifftour Cochem SW (Normale Räder)"},
+        {value: "Fahrrad-Picknick-Schifftour Cochem SW (E-Bikes)", viewValue: "Fahrrad-Picknick-Schifftour Cochem SW (E-Bikes)"},
+        {value: "Fahrrad-Picknick-Schifftour Trabe-Trarbach (E-Bikes)", viewValue: "Fahrrad-Picknick-Schifftour Trabe-Trarbach (E-Bikes)"},
+        {value: "Fahrrad-Picknick-Schifftour Bernkastel-Kues (Normale Räder)", viewValue: "Fahrrad-Picknick-Schifftour Bernkastel-Kues (Normale Räder)"},
+        {value: "Fahrrad-Picknick-Schifftour Bernkastel-Kues (E-Bikes)", viewValue: "Fahrrad-Picknick-Schifftour Bernkastel-Kues (E-Bikes)"}
 
+      ],
+    },
+    {
+      name: 'Wein-Tickets',
+      pokemon: [
+        {value: "Weinbergswanderung Klotten", viewValue: "Weinbergswanderung Klotten"},
+        {value: "Weinbergswanderung Ernst", viewValue: "Weinbergswanderung Ernst"},
+        {value: "Weinerlebniswanderung Bruttig", viewValue: "Weinerlebniswanderung Bruttig"},
+      ],
+    },
+    {
+      name: 'Segway',
+      pokemon: [
+        {value: "Segway Tour Cochem", viewValue: "Segway Tour Cochem"},
+        {value: "Segway Tour Klotten", viewValue: "Segway Tour Klotten"},
+      ],
+    },
+  ];
+
+
+  public linear = false;
+ 
   public user: any = {
       fullName: '',
       email: '',
@@ -38,5 +104,9 @@ public modes: any[] = [
 public toggleModes(event: IButtonGroupEventArgs): void {
 this.linear = this.modes[event.index].linear;
 }
+
+
 title = 'gustavo';
+
+
 }

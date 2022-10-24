@@ -59,6 +59,7 @@ import { IgxStepperModule, IgxButtonModule, IgxButtonGroupModule } from "igniteu
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 const meineRouten: Routes = [
   { path: "neueBuchung", component: NeueBuchungComponent },
   { path: "finden", component: BuchungfindenComponent },
@@ -66,6 +67,7 @@ const meineRouten: Routes = [
   { path: "bearbeiten", component: BuchungBearbeitenComponent },
   { path: "stornieren", component: BuchungStornierenComponent },
   { path: "", component: StartseiteComponent },
+  { path: "startseite", component: StartseiteComponent },
 ]; //Array von Routen
 
 @NgModule({
@@ -124,6 +126,7 @@ const meineRouten: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     IgxStepperModule, IgxButtonModule, IgxButtonGroupModule ,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

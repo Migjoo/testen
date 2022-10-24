@@ -12,4 +12,9 @@ export class KopfComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  weiterleiten(): void{
+    window.location.href= "startseite";
+   }
+ 
+
 }

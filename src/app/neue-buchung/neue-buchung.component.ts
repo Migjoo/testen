@@ -13,6 +13,14 @@ interface PokemonGroup {
   name: string;
   pokemon: Pokemon[];
 }
+interface Food {
+  value: string;
+  viewValue: string;
+}
+interface Zahlung {
+  value: string;
+  viewValue: string;
+}
 
 
 @Component({
@@ -22,6 +30,9 @@ interface PokemonGroup {
 })
 export class NeueBuchungComponent{
   pokemonControl = new FormControl('');
+
+
+
   pokemonGroups: PokemonGroup[] = [
     {
       name: 'kombitickets',
@@ -72,7 +83,20 @@ export class NeueBuchungComponent{
         {value: "Segway Tour Klotten", viewValue: "Segway Tour Klotten"},
       ],
     },
+    
+  ]
+  foods: Food[] = [
+    {value: 'Reservierung', viewValue: 'Reservierung'},
+    {value: 'Gutschein', viewValue: 'Gutschein'},
+    {value: 'Angebot', viewValue: 'Angebot'},
   ];
+  zahlungen: Zahlung[] = [
+    {value: 'Anzahlung', viewValue: 'Anzahlung'},
+    {value: 'Restzahlung', viewValue: 'Restzahlung'},
+    {value: 'Bar vor Ort', viewValue: 'Bar vor Ort'},
+    {value: 'Überweisung', viewValue: 'Überweisung'},
+  ];;
+
 
 
   public linear = false;

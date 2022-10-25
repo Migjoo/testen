@@ -18,42 +18,43 @@
           <div class="sample-step-actions">   
              <mat-form-field appearance="fill">
                 <mat-label>Vorname</mat-label>
-                <input matInput placeholder="Vorname" formControlName="firstCtrl" required>
+                <input #vorname matInput placeholder="Vorname" formControlName="firstCtrl" #vorna required>
               </mat-form-field>
               <mat-form-field appearance="fill" id="name">
-                <mat-label>Nachname</mat-label>
-                <input matInput placeholder="Nachname" formControlName="firstCtrl" required>
+                <mat-label >Nachname</mat-label>
+                <input  #nachname matInput placeholder="Nachname" formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill" style= "width: 25%;">
                 <mat-label>Straße</mat-label>
-                <input matInput placeholder="Straße" formControlName="firstCtrl" required>
+                <input #straße matInput placeholder="Straße" formControlName="firstCtrl" required>
               </mat-form-field> 
               <mat-form-field appearance="fill" style= "width: 6%;">
                 <mat-label>Nr.</mat-label>
-                <input matInput placeholder="Nr." formControlName="firstCtrl" required>
+                <input #nummer matInput placeholder="Nr." formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Postleitzahl</mat-label>
-                <input matInput placeholder="Postleitzahl" formControlName="firstCtrl" required>
+                <input #plz matInput placeholder="Postleitzahl" formControlName="firstCtrl" required>
               </mat-form-field> 
               <mat-form-field appearance="fill">
                 <mat-label>Ort</mat-label>
-                <input matInput placeholder="Ort" formControlName="firstCtrl" required>
+                <input #ort matInput placeholder="Ort" formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill" style= "width: 25%;">
                 <mat-label>E-mail</mat-label>
-                <input matInput placeholder="E-mail" formControlName="firstCtrl" required >
+                <input #mail matInput placeholder="E-mail" formControlName="firstCtrl" required >
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Telefon</mat-label>
-                <input matInput placeholder="Telefon" formControlName="firstCtrl" required>
+                <input #tel matInput placeholder="Telefon" formControlName="firstCtrl" required>
               </mat-form-field> 
               <br>
-              <button igxButton="raised" (click)="stepper.next()">NEXT</button>
+
+              <button igxButton="raised" (click)="stepper.next()" class="weiter">WEITER</button>
           </div>
       </div>
   </igx-step>
@@ -68,7 +69,7 @@
             <mat-form-field appearance="fill" style="width: 35%;">
                 
                 <mat-label>Ticketauswahl</mat-label>
-                <mat-select [formControl]="pokemonControl">
+                <mat-select [formControl]="pokemonControl" #auswahlT >
                   <mat-option>-- None --</mat-option>
                   <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
                                 [disabled]="group.disabled">
@@ -108,7 +109,7 @@
             <br>
             <mat-form-field appearance="fill">
                 <mat-label>Zahlungsart</mat-label>
-                <mat-select>
+                <mat-select #select>
                     <mat-option *ngFor="let zahlung of zahlungen" [value]="zahlung.value">
                          {{zahlung.viewValue}}
                      </mat-option>
@@ -116,8 +117,8 @@
                 </mat-form-field>
                 <br>
           
-              <button igxButton="raised" (click)="stepper.prev()">PREVIOUS</button>
-              <button igxButton="raised" (click)="stepper.next()">NEXT</button>
+              <button igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
+              <button igxButton="raised" (click)="stepper.next(); test()" class="weiter">WEITER</button>
           </div>
          
       </div>
@@ -127,9 +128,55 @@
     <span igxStepTitle>Übersicht</span>
     <div igxStepContent>
         <div class="sample-step-actions">
-          <h1>Migjomatic</h1>
-            <button  igxButton="raised" (click)="stepper.prev()">PREVIOUS</button>
-            <button igxButton="raised" (click)="stepper.reset()">RESET</button>
+          
+          <table  style="width: 100px;">
+            <tr>
+              <td >Vorname:</td>
+              <td #vn ></td>
+            </tr>
+            <tr >
+              <td >Nachname:</td>
+              <td #nn></td>
+            </tr>
+            <tr>
+            <td >Straße und Hausnummer</td>
+            <td #stn></td>
+          </tr>
+          <tr >
+            <td >PLZ und Wohnort</td>
+            <td #add></td>
+          </tr>
+          <tr>
+            <td >Telefonnummer</td>
+            <td #te></td>
+          </tr>
+          <tr >
+            <td >Email</td>
+            <td #em></td>
+          </tr>
+          <tr>
+            <td >Datum und Uhrzeit</td>
+            <td ></td>
+          </tr>
+          <tr >
+            <td >Ticketart</td>
+            <td ></td>
+          </tr>
+          <tr>
+          <td >Personenanzahl</td>
+          <td ></td>
+        </tr>
+        <tr >
+          <td >Zahlungsart</td>
+          <td ></td>
+        </tr>
+        
+          </table>
+<br>
+
+
+            <button  igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
+            <button igxButton="raised" (click)="stepper.reset()" class="weiter">BESTÄTIGEN</button>
         </div>
     </div>
 </igx-step>

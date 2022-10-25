@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ViewChild,  ElementRef, AfterViewInit } from '@angular/core';
 import { IButtonGroupEventArgs } from 'igniteui-angular';
 import {FormControl} from '@angular/forms';
 
@@ -29,9 +29,30 @@ interface Zahlung {
   styleUrls: ['./neue-buchung.component.scss']
 })
 export class NeueBuchungComponent{
+
+@ViewChild("nachname") nachname!: ElementRef;  
+@ViewChild("vorname") vorname!: ElementRef;  
+@ViewChild("nn") nn!: ElementRef;  
+@ViewChild("vn") vn!: ElementRef; 
+
+
+@ViewChild("straße") straße!: ElementRef;  
+@ViewChild("nummer") nummer!: ElementRef;  
+@ViewChild("plz") plz!: ElementRef;  
+@ViewChild("ort") ort!: ElementRef; 
+@ViewChild("mail") mail!: ElementRef; 
+@ViewChild("tel") tel!: ElementRef; 
+
+@ViewChild("stn") stn!: ElementRef; 
+@ViewChild("add") add!: ElementRef; 
+@ViewChild("te") te!: ElementRef; 
+@ViewChild("em") em!: ElementRef; 
+
+ 
+@ViewChild("auswahlT") auswahlT!: ElementRef; 
+
+
   pokemonControl = new FormControl('');
-
-
 
   pokemonGroups: PokemonGroup[] = [
     {
@@ -129,6 +150,24 @@ public toggleModes(event: IButtonGroupEventArgs): void {
 this.linear = this.modes[event.index].linear;
 }
 
+
+
+test(): void{
+
+
+  alert(this.auswahlT.nativeElement.value);
+  
+this.vn.nativeElement.innerHTML = this.vorname.nativeElement.value;
+this.nn.nativeElement.innerHTML = this.nachname.nativeElement.value;
+
+
+this.stn.nativeElement.innerHTML = this.straße.nativeElement.value + " "+this.nummer.nativeElement.value ;
+this.add.nativeElement.innerHTML = this.plz.nativeElement.value + " " +this.ort.nativeElement.value ;
+this.te.nativeElement.innerHTML = this.mail.nativeElement.value;
+this.em.nativeElement.innerHTML = this.tel.nativeElement.value;
+
+
+ }
 
 title = 'gustavo';
 

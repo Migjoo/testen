@@ -18,39 +18,39 @@
           <div class="sample-step-actions">   
              <mat-form-field appearance="fill">
                 <mat-label>Vorname</mat-label>
-                <input #vorname matInput placeholder="Vorname" formControlName="firstCtrl" #vorna required>
+                <input #vorname matInput placeholder="Vorname"  required>
               </mat-form-field>
               <mat-form-field appearance="fill" id="name">
                 <mat-label >Nachname</mat-label>
-                <input  #nachname matInput placeholder="Nachname" formControlName="firstCtrl" required>
+                <input  #nachname matInput placeholder="Nachname"  required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill" style= "width: 25%;">
                 <mat-label>Straße</mat-label>
-                <input #straße matInput placeholder="Straße" formControlName="firstCtrl" required>
+                <input #straße matInput placeholder="Straße"  required>
               </mat-form-field> 
               <mat-form-field appearance="fill" style= "width: 6%;">
                 <mat-label>Nr.</mat-label>
-                <input #nummer matInput placeholder="Nr." formControlName="firstCtrl" required>
+                <input #nummer matInput placeholder="Nr."  required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Postleitzahl</mat-label>
-                <input #plz matInput placeholder="Postleitzahl" formControlName="firstCtrl" required>
+                <input #plz matInput placeholder="Postleitzahl"  required>
               </mat-form-field> 
               <mat-form-field appearance="fill">
                 <mat-label>Ort</mat-label>
-                <input #ort matInput placeholder="Ort" formControlName="firstCtrl" required>
+                <input #ort matInput placeholder="Ort"  required>
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill" style= "width: 25%;">
                 <mat-label>E-mail</mat-label>
-                <input #mail matInput placeholder="E-mail" formControlName="firstCtrl" required >
+                <input #mail matInput placeholder="E-mail"  required >
               </mat-form-field> 
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Telefon</mat-label>
-                <input #tel matInput placeholder="Telefon" formControlName="firstCtrl" required>
+                <input #tel matInput placeholder="Telefon"  required>
               </mat-form-field> 
               <br>
 
@@ -69,7 +69,7 @@
             <mat-form-field appearance="fill" style="width: 35%;">
                 
                 <mat-label>Ticketauswahl</mat-label>
-                <mat-select [formControl]="pokemonControl" #auswahlT >
+                <mat-select [formControl]="pokemonControl" #auswahlT [(value)]="auswahl">
                   <mat-option>-- None --</mat-option>
                   <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
                                 [disabled]="group.disabled">
@@ -80,6 +80,7 @@
                 </mat-select> 
                 
                 </mat-form-field>
+               
             <br>
            
          
@@ -160,7 +161,7 @@
           </tr>
           <tr >
             <td >Ticketart</td>
-            <td ></td>
+            <td >{{auswahl}}</td>
           </tr>
           <tr>
           <td >Personenanzahl</td>
@@ -177,6 +178,7 @@
 
             <button  igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
             <button igxButton="raised" (click)="stepper.reset()" class="weiter">BESTÄTIGEN</button>
+            <button igxButton="raised" (click)="emailSenden()" >Email-Senden</button>
         </div>
     </div>
 </igx-step>

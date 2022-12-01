@@ -50,7 +50,7 @@ export class NeueBuchungComponent{
 
  
 @ViewChild("auswahlT") auswahlT!: ElementRef; 
-
+  public auswahl: string = ""; 
 
   pokemonControl = new FormControl('');
 
@@ -153,22 +153,18 @@ this.linear = this.modes[event.index].linear;
 
 
 test(): void{
-
-
-  alert(this.auswahlT.nativeElement.value);
-  
 this.vn.nativeElement.innerHTML = this.vorname.nativeElement.value;
 this.nn.nativeElement.innerHTML = this.nachname.nativeElement.value;
-
-
 this.stn.nativeElement.innerHTML = this.straße.nativeElement.value + " "+this.nummer.nativeElement.value ;
 this.add.nativeElement.innerHTML = this.plz.nativeElement.value + " " +this.ort.nativeElement.value ;
-this.te.nativeElement.innerHTML = this.mail.nativeElement.value;
-this.em.nativeElement.innerHTML = this.tel.nativeElement.value;
+this.te.nativeElement.innerHTML = this.tel.nativeElement.value;
+this.em.nativeElement.innerHTML = this.mail.nativeElement.value;
 
 
  }
-
+emailSenden():void{
+  location.href = "mailto:"+this.mail.nativeElement.value+"?subject='Voucher Siweris'&body='Migjen Rexhbeqaj schreibt Email'";
+}
 title = 'gustavo';
 
 

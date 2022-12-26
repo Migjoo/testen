@@ -2,7 +2,7 @@
 import { Component, ViewChild,  ElementRef, AfterViewInit } from '@angular/core';
 import { IButtonGroupEventArgs } from 'igniteui-angular';
 import {FormControl} from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
 interface Pokemon {
   value: string;
   viewValue: string;
@@ -21,7 +21,6 @@ interface Zahlung {
   value: string;
   viewValue: string;
 }
-
 
 @Component({
   selector: 'app-neue-buchung',
@@ -50,6 +49,10 @@ export class NeueBuchungComponent{
 
  
 @ViewChild("auswahlT") auswahlT!: ElementRef; 
+
+constructor(private http: HttpClient) {}
+
+
   public auswahl: string = ""; 
 
   pokemonControl = new FormControl('');
@@ -163,8 +166,28 @@ this.em.nativeElement.innerHTML = this.mail.nativeElement.value;
 
  }
 emailSenden():void{
-  location.href = "mailto:"+this.mail.nativeElement.value+"?subject='Voucher Siweris'&body='Migjen Rexhbeqaj schreibt Email'";
+
+console.log("hallo/dsuadas");
+const data = {
+  ticketName: 'Kolb',
+  name: 'Nils dsadas',
+  telefon: 'test',
+  email: 'test',
+  datum: 'Date',
+  adresse: {
+    strasse: 'test',
+    hausnummer: 'test',
+    plz: 'test',
+    stadt: 'test'
+  },
+  personsNumber: 32
+};
+  this.http.post('http://localhost:3000/buchung', data).subscribe(response => {
+    console.log(response);
+  });
 }
+  
+
 title = 'gustavo';
 
 

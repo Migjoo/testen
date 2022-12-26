@@ -7,23 +7,18 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 export interface UserData {
-  id: string;
+  datum: string;
   name: string;
-  progress: string;
-  fruit: string;
+  bucher: string;
+  personen: string;
+  max: string;
+  rest: string;
+  web: string;
+  js: string;
+  md: string;
 }
 
 /** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  '800,00 €',
-  '945,00 €',
-  '350,00 €',
-  '450,00 €',
-  '600,00 €',
-  '680,00 €',
-  '330,00 €',
-  '289,00 €',
-];
 const NAMES: string[] = [
   'Maia',
   'Asher',
@@ -55,7 +50,7 @@ const NAMES: string[] = [
   styleUrls: ['./buchungsuebersicht.component.scss']
 })
 export class BuchungsuebersichtComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+  displayedColumns: string[] = ['datum', 'name','bucher', 'personen', 'max', 'rest', 'web',  'js',  'md', ];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator)
@@ -85,6 +80,11 @@ export class BuchungsuebersichtComponent implements AfterViewInit {
     }
   }
 }
+function getRandomDate() {
+  const maxDate = Date.now();
+  const timestamp = Math.floor(Math.random() * maxDate);
+  return new Date(timestamp);
+}
 
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
@@ -95,10 +95,15 @@ function createNewUser(id: number): UserData {
     '.';
 
   return {
-    id: (Math.round((Math.random() * (999999 - 10000) + 10000))).toString(),
+    datum: getRandomDate().toISOString(),
     name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+    bucher: "",
+    personen: "",
+    max: "",
+    rest: "",
+    web: "",
+    js: "",
+    md: "",
   };
 }
 

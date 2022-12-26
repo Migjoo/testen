@@ -17,9 +17,13 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          
           "options": {
+           
+           
             "outputPath": "dist/excelwriter",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -71,6 +75,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "Excelwriter:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "Excelwriter:build:production"

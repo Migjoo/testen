@@ -12,6 +12,7 @@ export class StartseiteComponent implements OnInit {
   ngOnInit(): void {
   }
   weiterleiten(seite: string): void{
+    
    window.location.href= seite;
 
   }

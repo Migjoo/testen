@@ -33,21 +33,16 @@ export class NeueBuchungComponent{
 @ViewChild("vorname") vorname!: ElementRef;  
 @ViewChild("nn") nn!: ElementRef;  
 @ViewChild("vn") vn!: ElementRef; 
-
-
 @ViewChild("straße") straße!: ElementRef;  
 @ViewChild("nummer") nummer!: ElementRef;  
 @ViewChild("plz") plz!: ElementRef;  
 @ViewChild("ort") ort!: ElementRef; 
 @ViewChild("mail") mail!: ElementRef; 
 @ViewChild("tel") tel!: ElementRef; 
-
 @ViewChild("stn") stn!: ElementRef; 
 @ViewChild("add") add!: ElementRef; 
 @ViewChild("te") te!: ElementRef; 
 @ViewChild("em") em!: ElementRef; 
-
- 
 @ViewChild("auswahlT") auswahlT!: ElementRef; 
 
 constructor(private http: HttpClient) {}
@@ -172,7 +167,7 @@ const data = {
   ticketName: 'Kolb',
   name: 'Nils dsadas',
   telefon: 'test',
-  email: 'test',
+  email: 'migjenre@gmail.com',
   datum: 'Date',
   adresse: {
     strasse: 'test',
@@ -182,7 +177,7 @@ const data = {
   },
   personsNumber: 32
 };
-  this.http.post('http://localhost:3000/buchung', data).subscribe(response => {
+  this.http.post('http://localhost:3000/buchung', data, {headers: {'Access-Control-Allow-Origin': '*'}}).subscribe(response => {
     console.log(response);
   });
 }

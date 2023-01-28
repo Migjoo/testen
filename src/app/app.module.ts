@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KopfComponent } from './kopf/kopf.component';
-
 import { StartseiteComponent } from './startseite/startseite.component';
 import { NeueBuchungComponent } from './neue-buchung/neue-buchung.component';
 import { BuchungsuebersichtComponent } from './buchungsuebersicht/buchungsuebersicht.component';
@@ -64,7 +63,6 @@ const meineRouten: Routes = [
   { path: "neueBuchung", component: NeueBuchungComponent },
   { path: "finden", component: BuchungfindenComponent },
   { path: "uebersicht", component: BuchungsuebersichtComponent },
-
   { path: "", component: StartseiteComponent },
   { path: "startseite", component: StartseiteComponent },
   { path: "rg", component: RechnungenComponent },

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Buchungen } from '../Domain/buchungen';
 import { Rechnung } from '../Domain/rechnung';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatenbankService {
+  
 
   listeBuchungen: Buchungen[] = [
     new Buchungen(),
@@ -17,7 +19,7 @@ export class DatenbankService {
   listeRechnungen: Rechnung[]=
   [new Rechnung(), new Rechnung(), new Rechnung];
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
   getBuchungen(){
     return this.listeBuchungen;
   }

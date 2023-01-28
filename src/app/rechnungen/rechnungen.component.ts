@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DatenbankService } from '../DI/datenbank.service';
 import { Rechnung } from '../Domain/rechnung';
 
@@ -8,8 +8,12 @@ import { Rechnung } from '../Domain/rechnung';
   styleUrls: ['./rechnungen.component.scss']
 })
 export class RechnungenComponent implements OnInit {
+  @ViewChild("filter") filterVariable!: ElementRef; 
+
 liste : Rechnung [];
 p=1;
+zwischenspeicher: string= ""; 
+
   constructor(public daten: DatenbankService) { 
     this.liste= [new Rechnung()];
   }
@@ -26,5 +30,14 @@ nextPage(){
   }
   previousPage(){
   this.p--;
+  }
+  filtern(){
+    let test =  this.filterVariable.nativeElement.value;
+    let zwischenspeicher: Rechnung[];
+    for(let i of this.liste){
+      if(i.Rechnungsnummer == test){
+        
+      }
+    }
   }
 }

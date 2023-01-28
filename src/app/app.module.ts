@@ -9,8 +9,6 @@ import { StartseiteComponent } from './startseite/startseite.component';
 import { NeueBuchungComponent } from './neue-buchung/neue-buchung.component';
 import { BuchungsuebersichtComponent } from './buchungsuebersicht/buchungsuebersicht.component';
 import { BuchungfindenComponent } from './buchungfinden/buchungfinden.component';
-import { BuchungBearbeitenComponent } from './buchung-bearbeiten/buchung-bearbeiten.component';
-import { BuchungStornierenComponent } from './buchung-stornieren/buchung-stornieren.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -54,23 +52,26 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { IgxStepperModule, IgxButtonModule, IgxButtonGroupModule } from "igniteui-angular";
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RechnungenComponent } from './rechnungen/rechnungen.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { KalkulationComponent } from './kalkulation/kalkulation.component';
 
 const meineRouten: Routes = [
   { path: "neueBuchung", component: NeueBuchungComponent },
   { path: "finden", component: BuchungfindenComponent },
   { path: "uebersicht", component: BuchungsuebersichtComponent },
-  { path: "bearbeiten", component: BuchungBearbeitenComponent },
-  { path: "stornieren", component: BuchungStornierenComponent },
+
   { path: "", component: StartseiteComponent },
   { path: "startseite", component: StartseiteComponent },
+  { path: "rg", component: RechnungenComponent },
 ]; //Array von Routen
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     KopfComponent,
@@ -78,8 +79,8 @@ const meineRouten: Routes = [
     NeueBuchungComponent,
     BuchungsuebersichtComponent,
     BuchungfindenComponent,
-    BuchungBearbeitenComponent,
-    BuchungStornierenComponent
+    RechnungenComponent,
+    KalkulationComponent
   ],
   imports: [
     RouterModule.forRoot(meineRouten),
@@ -87,6 +88,7 @@ const meineRouten: Routes = [
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
+    NgxPaginationModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -126,6 +128,7 @@ const meineRouten: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     IgxStepperModule, IgxButtonModule, IgxButtonGroupModule ,
+  
     
   ],
   providers: [],

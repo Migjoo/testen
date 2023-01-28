@@ -1,0 +1,34 @@
+<ngx-pagination-controls pagination-controls></ngx-pagination-controls>
+
+<table>
+    <thead>
+    <tr>
+      <th>Nachname</th>
+      <th>Zahlungsziel</th>
+      <th>Rechnungsnummer</th>
+      <th>Reisetermin</th>
+      <th>Rechnungsdatum</th>
+      <th>Reiseziel</th>
+      <th>Personenzahl</th>
+      <th>Gesamt</th>
+      <th>Rest</th>
+    </tr>
+  </thead>
+    <tr *ngFor="let i of liste | paginate: { itemsPerPage: 5, currentPage: p }">
+      <td><input [ngModel]="i.nachname"  ></td>
+      <td><input [ngModel]="i.zahlungsziel" ></td>
+      <td><input [ngModel]="i.Rechnungsnummer" ></td>
+      <td><input [ngModel]="i.Reisetermin" ></td>
+      <td><input [ngModel]="i.Rechnungsdatum" ></td>
+      <td><input [ngModel]="i.Reiseziel" ></td>
+      <td><input [ngModel]="i.Personenzahl" ></td>
+      <td><input [ngModel]="i.gesamt" ></td>
+      <td><input [ngModel]="i.rest" ></td>
+    </tr>
+  </table>
+  <button mat-raised-button (click)="previousPage()">Previous Page</button>
+<button mat-raised-button (click)="nextPage()">Next Page</button>
+<br>
+<br>
+
+  <button mat-raised-button (click)="setRechnungen()">Set Rechnungen</button>

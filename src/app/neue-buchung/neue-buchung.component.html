@@ -66,37 +66,31 @@
       <span igxStepTitle>Ticketauswahl</span>
       <div igxStepContent>
           <div class="sample-step-actions">  
-            <mat-form-field appearance="fill" style="width: 35%;">
-                
-                <mat-label>Ticketauswahl</mat-label>
-                <mat-select [formControl]="pokemonControl" #auswahlT [(value)]="auswahl">
-                  <mat-option>-- None --</mat-option>
-                  <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
-                                [disabled]="group.disabled">
-                    <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
-                      {{pokemon.viewValue}}
-                    </mat-option>
-                  </mat-optgroup>
-                </mat-select> 
-                
-                </mat-form-field>
-               
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>Kombiticket</mat-label>
+              <mat-select [(ngModel)]="auswahlKombiticket">
+                <mat-option *ngFor="let food of kombitickets" [value]="food.id">
+                  {{food.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
             <br>
            
          
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Datum</mat-label>
-                <input matInput type="date">
+                <input #datum matInput type="date">
               </mat-form-field>
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Uhrzeit</mat-label>
-                <input matInput type="time">
+                <input #uhr matInput type="time">
               </mat-form-field>
               <br>
 
             <mat-form-field appearance="fill">
             <mat-label>Ticketart</mat-label>
-            <mat-select>
+            <mat-select #ticket [(ngModel)]="auswahlTicket">
                 <mat-option *ngFor="let food of foods" [value]="food.value">
                      {{food.viewValue}}
                  </mat-option>
@@ -104,13 +98,13 @@
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill" style="width: 10%;">
                 <mat-label>Personenanzahl</mat-label>
-                <input matInput type="number" minlength="1" maxlength="32">
+                <input #anzahl matInput type="number" minlength="1" maxlength="32">
               </mat-form-field>
 
             <br>
             <mat-form-field appearance="fill">
                 <mat-label>Zahlungsart</mat-label>
-                <mat-select #select>
+                <mat-select #select [(ngModel)]="auswahlZahlungsart">
                     <mat-option *ngFor="let zahlung of zahlungen" [value]="zahlung.value">
                          {{zahlung.viewValue}}
                      </mat-option>
@@ -119,7 +113,7 @@
                 <br>
           
               <button igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
-              <button igxButton="raised" (click)="stepper.next(); test()" class="weiter">WEITER</button>
+              <button igxButton="raised" (click)="stepper.next(); uebersicht()" class="weiter">WEITER</button>
           </div>
          
       </div>
@@ -157,29 +151,22 @@
           </tr>
           <tr>
             <td >Datum und Uhrzeit</td>
-            <td ></td>
+            <td #da></td>
           </tr>
           <tr >
             <td >Ticketart</td>
-            <td >{{auswahl}}</td>
+            <td >{{auswahlTicket}}</td>
           </tr>
           <tr>
           <td >Personenanzahl</td>
-          <td ></td>
+          <td #peanzahl></td>
         </tr>
         <tr >
           <td >Zahlungsart</td>
-          <td ></td>
+          <td >{{auswahlZahlungsart}}</td>
         </tr>
           </table>
           <h1 *ngIf="sender">MIGJOMATIC</h1>
-          <div *ngIf="listeKombiticket">
-
-            <p *ngFor="let i of listeKombiticket">
-              {{i.Kombiticket}}
-
-            </p>
-          </div>
 <br>
 
 

@@ -1,18 +1,13 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit , OnInit} from '@angular/core';
 import { IButtonGroupEventArgs } from 'igniteui-angular';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DatenbankService } from '../DI/datenbank.service';
 import { Kombiticket } from '../Domain/kombiticket';
-interface Pokemon {
-  value: string;
-  viewValue: string;
-}
 
-interface PokemonGroup {
-  disabled?: boolean;
+interface kombi {
+  id: string;
   name: string;
-  pokemon: Pokemon[];
 }
 interface Food {
   value: string;
@@ -28,7 +23,7 @@ interface Zahlung {
   templateUrl: './neue-buchung.component.html',
   styleUrls: ['./neue-buchung.component.scss'],
 })
-export class NeueBuchungComponent {
+export class NeueBuchungComponent   implements OnInit{
   sender:boolean=false;
   @ViewChild('nachname') nachname!: ElementRef;
   @ViewChild('vorname') vorname!: ElementRef;
@@ -44,107 +39,35 @@ export class NeueBuchungComponent {
   @ViewChild('add') add!: ElementRef;
   @ViewChild('te') te!: ElementRef;
   @ViewChild('em') em!: ElementRef;
+  @ViewChild('da') da!: ElementRef;
+  @ViewChild('uhrz') uhrz!: ElementRef;
+  @ViewChild('uhr') uhr!: ElementRef;
+  @ViewChild('datum') datum!: ElementRef;
+  @ViewChild('anzahl') anzahl!: ElementRef;
+  @ViewChild('peanzahl') peanzahl!: ElementRef;
   @ViewChild('auswahlT') auswahlT!: ElementRef;
 
   constructor(private http: HttpClient, public daten: DatenbankService) {}
 
+  ngOnInit(): void {
+    this.daten.getListeKombiticket().then(() => {
+      this.listeKombiticket = this.daten.listeKombitickets;
+      for(let i of this.listeKombiticket){
+        this.kombitickets.push({id: i.ID, name: i.Kombiticket});
+      }
+      });
+  }
+
+  public kombitickets: kombi[]= [];
+
+
+
+  auswahlZahlungsart:string ="";
   public auswahl: string = '';
   public listeKombiticket: Kombiticket[]=[];
-  pokemonControl = new FormControl('');
+  public auswahlKombiticket: string= "";
 
-  pokemonGroups: PokemonGroup[] = [
-    {
-      name: 'kombitickets',
-      pokemon: [
-        { value: 'Kombiticket Treis', viewValue: 'Kombiticket Treis' },
-        { value: 'Kombiticket Klotten', viewValue: 'Kombiticket Klotten' },
-        { value: 'Kombiticket Ellenz', viewValue: 'Kombiticket Ellenz' },
-        { value: 'Kombiticket Bullay', viewValue: 'Kombiticket Bullay' },
-        { value: 'Kombiticket Lieser', viewValue: 'Kombiticket Lieser' },
-        { value: 'Kombiticket Kröv', viewValue: 'Kombiticket Kröv' },
-        { value: 'Kombiticket Enkirch', viewValue: 'Kombiticket Enkirch' },
-        {
-          value: 'Kombiticket Koblenz-Winningen Fries',
-          viewValue: 'Kombiticket Koblenz-Winningen Fries',
-        },
-        {
-          value: 'Kombiticket Koblenz-Winningen Knebel',
-          viewValue: 'Kombiticket Koblenz-Winningen Knebel',
-        },
-      ],
-    },
-    {
-      name: '"Mit dem Kanu"',
-      pokemon: [
-        {
-          value: 'Mit dem Kanu zum Winzer Cochem',
-          viewValue: 'Mit dem Kanu zum Winzer Cochem',
-        },
-        {
-          value: 'Mit dem Kanu zum Winzer Traben-Trarbach',
-          viewValue: 'Mit dem Kanu zum Winzer Traben-Trarbach',
-        },
-      ],
-    },
-    {
-      name: 'Fahrrad-Picknick-Schifftour',
-      pokemon: [
-        {
-          value: 'Fahrrad-Picknick-Schifftour Cochem KD (Normale Räder)',
-          viewValue: 'Fahrrad-Picknick-Schifftour Cochem KD (Normale Räder)',
-        },
-        {
-          value: 'Fahrrad-Picknick-Schifftour Cochem KD (E-Bikes)',
-          viewValue: 'Fahrrad-Picknick-Schifftour Cochem KD (E-Bikes)',
-        },
-        {
-          value: 'Fahrrad-Picknick-Schifftour Cochem SW (Normale Räder)',
-          viewValue: 'Fahrrad-Picknick-Schifftour Cochem SW (Normale Räder)',
-        },
-        {
-          value: 'Fahrrad-Picknick-Schifftour Cochem SW (E-Bikes)',
-          viewValue: 'Fahrrad-Picknick-Schifftour Cochem SW (E-Bikes)',
-        },
-        {
-          value: 'Fahrrad-Picknick-Schifftour Trabe-Trarbach (E-Bikes)',
-          viewValue: 'Fahrrad-Picknick-Schifftour Trabe-Trarbach (E-Bikes)',
-        },
-        {
-          value: 'Fahrrad-Picknick-Schifftour Bernkastel-Kues (Normale Räder)',
-          viewValue:
-            'Fahrrad-Picknick-Schifftour Bernkastel-Kues (Normale Räder)',
-        },
-        {
-          value: 'Fahrrad-Picknick-Schifftour Bernkastel-Kues (E-Bikes)',
-          viewValue: 'Fahrrad-Picknick-Schifftour Bernkastel-Kues (E-Bikes)',
-        },
-      ],
-    },
-    {
-      name: 'Wein-Tickets',
-      pokemon: [
-        {
-          value: 'Weinbergswanderung Klotten',
-          viewValue: 'Weinbergswanderung Klotten',
-        },
-        {
-          value: 'Weinbergswanderung Ernst',
-          viewValue: 'Weinbergswanderung Ernst',
-        },
-        {
-          value: 'Weinerlebniswanderung Bruttig',
-          viewValue: 'Weinerlebniswanderung Bruttig',
-        },
-      ],
-    },
-    {
-      name: 'Segway',
-      pokemon: [
-        { value: 'Segway Tour Cochem', viewValue: 'Segway Tour Cochem' },
-        { value: 'Segway Tour Klotten', viewValue: 'Segway Tour Klotten' },
-      ],
-    },
-  ];
+auswahlTicket="";
   foods: Food[] = [
     { value: 'Reservierung', viewValue: 'Reservierung' },
     { value: 'Gutschein', viewValue: 'Gutschein' },
@@ -191,15 +114,15 @@ export class NeueBuchungComponent {
     this.linear = this.modes[event.index].linear;
   }
 
-  test(): void {
+  uebersicht(): void {
     this.vn.nativeElement.innerHTML = this.vorname.nativeElement.value;
     this.nn.nativeElement.innerHTML = this.nachname.nativeElement.value;
-    this.stn.nativeElement.innerHTML = 
-    this.straße.nativeElement.value + ' ' + this.nummer.nativeElement.value;
-    this.add.nativeElement.innerHTML =
-    this.plz.nativeElement.value + ' ' + this.ort.nativeElement.value;
+    this.da.nativeElement.innerHTML = this.datum.nativeElement.value + ' ' + this.uhr.nativeElement.value;;
+    this.stn.nativeElement.innerHTML = this.straße.nativeElement.value + ' ' + this.nummer.nativeElement.value;
+    this.add.nativeElement.innerHTML = this.plz.nativeElement.value + ' ' + this.ort.nativeElement.value;
     this.te.nativeElement.innerHTML = this.tel.nativeElement.value;
     this.em.nativeElement.innerHTML = this.mail.nativeElement.value;
+    this.peanzahl.nativeElement.innerHTML = this.anzahl.nativeElement.value;
   }
 
 
@@ -207,27 +130,32 @@ export class NeueBuchungComponent {
 
 
   emailSenden(): void {
-    console.log('hallo/dsuadas');
     let email= this.em.nativeElement.innerHTML;
     let vorname= this.vn.nativeElement.innerHTML;
     let nachname= this.nn.nativeElement.innerHTML;
     let strasse = this.straße.nativeElement.value;
-    console.log(email);
+    let datum= this.da.nativeElement.innerHTML;
+    let tel= this.te.nativeElement.innerHTML;  
+    let nummer= this.nummer.nativeElement.innerHTML;
+    let plz= this.plz.nativeElement.innerHTML;
+    let ort= this.ort.nativeElement.innerHTML;
+    let anzahl= this.peanzahl.nativeElement.innerHTML;
+    
     const data = {
       "vorname": vorname,
       "nachname": nachname,
       "strasse": strasse,
-      "hausnummer": "17b",
-      "plz": "66666",
-      "stadt": "Musterstadt",
-      "telefon": "01234568915",
+      "hausnummer": nummer,
+      "plz": plz,
+      "stadt": ort,
+      "telefon": tel,
       "email": email,
       "ticket": {
-          "kombiticketID": "Kombi2",
-          "datum": "Thu Dec 01 2022 01:16:46",
-          "personsNumber": 4,
-          "ticketArt": "Reiseservice",
-          "zahlungsart": "Bar"
+          "kombiticketID": this.auswahlKombiticket,
+          "datum": datum,
+          "personsNumber": anzahl,
+          "ticketArt": this.auswahlTicket,
+          "zahlungsart": this.auswahlZahlungsart
       },
       "anbieter": "Siweris",
       "bearbeiter": "Julian Gegner",

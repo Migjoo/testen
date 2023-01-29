@@ -59,6 +59,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { KalkulationComponent } from './kalkulation/kalkulation.component';
 
+
 const meineRouten: Routes = [
   { path: "neueBuchung", component: NeueBuchungComponent },
   { path: "finden", component: BuchungfindenComponent },

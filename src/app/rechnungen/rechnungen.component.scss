@@ -1,48 +1,4 @@
 
-table {
-  width: 100%;
- border: none;
-  zoom: 70%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  
-  
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  font-size: 20px;
-  
-
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-  
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-  margin-bottom: 10px;
-  
-}
-input  {
-  font-size: 18px;
-  width: 100%;
-  height: 50px;
-  border:none
-}
-
-input:focus{
-  color: rgb(160, 5, 5);
-}
 
 table {
   width: 100%;
@@ -91,8 +47,10 @@ input:focus{
 
 
 #meineId {
-  width: 20%;
+  color: rgb(0, 0, 0);
+  width: 100%;
   height: 50px;
   border-bottom: 2px solid rgb(105, 27, 27);
+  
  
 }

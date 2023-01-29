@@ -48,7 +48,6 @@ export class NeueBuchungComponent   implements OnInit{
   @ViewChild('auswahlT') auswahlT!: ElementRef;
 
   constructor(private http: HttpClient, public daten: DatenbankService) {}
-
   ngOnInit(): void {
     this.daten.getListeKombiticket().then(() => {
       this.listeKombiticket = this.daten.listeKombitickets;

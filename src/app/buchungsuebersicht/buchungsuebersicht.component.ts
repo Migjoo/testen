@@ -32,17 +32,19 @@ export class BuchungsuebersichtComponent  implements OnInit {
     this.daten.setListeBuchungen(JSON.parse(JSON.stringify(this.liste)));
    }
    filterDatum(){
-    let test: string= this.filterVariable.nativeElement.value;
-
+    let test = this.filterVariable.nativeElement.value;
     let zwischenspeicher: Buchungen[] = [];
     for(let i of this.liste) {
-      if(i.tag == test) {
+      
+      if(i.tag.includes(test) || i.nameAktion.includes(test) ) {
         zwischenspeicher.push(i);
       }
     }
-   this.listeAnzeige=zwischenspeicher;
+    this.listeAnzeige = zwischenspeicher;
    }
+   }
+  
  
-}
+
 
 

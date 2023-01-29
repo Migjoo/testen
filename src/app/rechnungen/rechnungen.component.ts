@@ -8,18 +8,31 @@ import { Rechnung } from '../Domain/rechnung';
   styleUrls: ['./rechnungen.component.scss']
 })
 export class RechnungenComponent implements OnInit {
-  @ViewChild("filter") filterVariable!: ElementRef; 
+  @ViewChild("filterNr") filterVariable!: ElementRef;
+  @ViewChild("filterNa") filterNachname!: ElementRef;
 
 liste : Rechnung [];
 p=1;
-zwischenspeicher: string= ""; 
+listeMitFilter: Rechnung[]=[];
 
   constructor(public daten: DatenbankService) { 
     this.liste= [new Rechnung()];
   }
+  filterMitNachname(){
+    let test = this.filterNachname.nativeElement.value;
+    let zwischenspeicher: Rechnung[] = [];
+    for(let i of this.liste) {
+      if(i.nachname == test) {
+        zwischenspeicher.push(i);
+      }
+    }
+    this.listeMitFilter = zwischenspeicher;
+  }
 
   ngOnInit(): void {
     this.liste = this.daten.getRechnungen();
+    this.listeMitFilter= this.liste;
+  
   }
 setRechnungen(){
   this.liste.push(new Rechnung());
@@ -31,13 +44,15 @@ nextPage(){
   previousPage(){
   this.p--;
   }
-  filtern(){
-    let test =  this.filterVariable.nativeElement.value;
-    let zwischenspeicher: Rechnung[];
-    for(let i of this.liste){
-      if(i.Rechnungsnummer == test){
-        
+  filtern() {
+    let test = this.filterVariable.nativeElement.value;
+    let zwischenspeicher: Rechnung[] = [];
+    for(let i of this.liste) {
+      if(i.Rechnungsnummer == test) {
+        zwischenspeicher.push(i);
       }
     }
+    this.listeMitFilter = zwischenspeicher;
   }
+ 
 }

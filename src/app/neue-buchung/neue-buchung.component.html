@@ -171,13 +171,20 @@
           <td >Zahlungsart</td>
           <td ></td>
         </tr>
-        
           </table>
+          <h1 *ngIf="sender">MIGJOMATIC</h1>
+          <div *ngIf="listeKombiticket">
+
+            <p *ngFor="let i of listeKombiticket">
+              {{i.Kombiticket}}
+
+            </p>
+          </div>
 <br>
 
 
             <button  igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
-            <button igxButton="raised" (click)="stepper.reset()" class="weiter">BESTÄTIGEN</button>
+            <button igxButton="raised" (click)="offen()" class="weiter">BESTÄTIGEN</button>
             <button igxButton="raised" (click)="emailSenden()" >Email-Senden</button>
         </div>
     </div>

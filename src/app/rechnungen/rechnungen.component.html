@@ -1,5 +1,7 @@
-<input>
-<button mat-raised-button (click)="filtern()" #filter>Filter Name</button>
+<input #filterNr>
+<button mat-raised-button (click)="filtern()" >Filter Rechnungsnummer </button>
+<input #filterNa>
+<button mat-raised-button (click)="filterMitNachname()">Filter Nachname </button>
 <ngx-pagination-controls pagination-controls></ngx-pagination-controls>
 <table>
     <thead>
@@ -15,7 +17,7 @@
       <th>Rest</th>
     </tr>
   </thead>
-    <tr *ngFor="let i of liste | paginate: { itemsPerPage: 5, currentPage: p }">
+    <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 5, currentPage: p }">
       <td><input [ngModel]="i.nachname"  ></td>
       <td><input [ngModel]="i.zahlungsziel" ></td>
       <td><input [ngModel]="i.Rechnungsnummer" ></td>

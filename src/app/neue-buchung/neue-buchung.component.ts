@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { IButtonGroupEventArgs } from 'igniteui-angular';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { DatenbankService } from '../DI/datenbank.service';
+import { Kombiticket } from '../Domain/kombiticket';
 interface Pokemon {
   value: string;
   viewValue: string;
@@ -27,6 +29,7 @@ interface Zahlung {
   styleUrls: ['./neue-buchung.component.scss'],
 })
 export class NeueBuchungComponent {
+  sender:boolean=false;
   @ViewChild('nachname') nachname!: ElementRef;
   @ViewChild('vorname') vorname!: ElementRef;
   @ViewChild('nn') nn!: ElementRef;
@@ -43,10 +46,10 @@ export class NeueBuchungComponent {
   @ViewChild('em') em!: ElementRef;
   @ViewChild('auswahlT') auswahlT!: ElementRef;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public daten: DatenbankService) {}
 
   public auswahl: string = '';
-
+  public listeKombiticket: Kombiticket[]=[];
   pokemonControl = new FormControl('');
 
   pokemonGroups: PokemonGroup[] = [
@@ -191,34 +194,46 @@ export class NeueBuchungComponent {
   test(): void {
     this.vn.nativeElement.innerHTML = this.vorname.nativeElement.value;
     this.nn.nativeElement.innerHTML = this.nachname.nativeElement.value;
-    this.stn.nativeElement.innerHTML =
-      this.straße.nativeElement.value + ' ' + this.nummer.nativeElement.value;
+    this.stn.nativeElement.innerHTML = 
+    this.straße.nativeElement.value + ' ' + this.nummer.nativeElement.value;
     this.add.nativeElement.innerHTML =
-      this.plz.nativeElement.value + ' ' + this.ort.nativeElement.value;
+    this.plz.nativeElement.value + ' ' + this.ort.nativeElement.value;
     this.te.nativeElement.innerHTML = this.tel.nativeElement.value;
     this.em.nativeElement.innerHTML = this.mail.nativeElement.value;
   }
+
+
+
+
+
   emailSenden(): void {
     console.log('hallo/dsuadas');
-
+    let email= this.em.nativeElement.innerHTML;
+    let vorname= this.vn.nativeElement.innerHTML;
+    let nachname= this.nn.nativeElement.innerHTML;
+    let strasse = this.straße.nativeElement.value;
+    console.log(email);
     const data = {
-      vorname: 'Migjen',
-      nachname: 'Rexbheqaj',
-      strasse: 'hier',
-      hausnummer: '12',
-      plz: '2523',
-      stadt: 'Cochem',
-      telefon: '13243124',
-      ticket: {
-        name: 'migjo',
-        datum: '22.10.2023',
-        personsNumber: 213,
-        ticketArt: '',
-        zahlungsart: 'bvor',
+      "vorname": vorname,
+      "nachname": nachname,
+      "strasse": strasse,
+      "hausnummer": "17b",
+      "plz": "66666",
+      "stadt": "Musterstadt",
+      "telefon": "01234568915",
+      "email": email,
+      "ticket": {
+          "kombiticketID": "Kombi2",
+          "datum": "Thu Dec 01 2022 01:16:46",
+          "personsNumber": 4,
+          "ticketArt": "Reiseservice",
+          "zahlungsart": "Bar"
       },
-      ticketName: 'Kolb',
-      email: 'migjenre@gmail.com',
-    };
+      "anbieter": "Siweris",
+      "bearbeiter": "Julian Gegner",
+      "privatKunde": "true",
+      "anzahlung": "false" 
+  };
     this.http
       .post('http://localhost:3000/buchung', data, {
         headers: { 'Access-Control-Allow-Origin': '*' },
@@ -227,6 +242,15 @@ export class NeueBuchungComponent {
         console.log(response);
       });
   }
+offen(){
+  this.sender= true;
+  this.daten.getListeKombiticket().then(() => {
+    this.listeKombiticket = this.daten.listeKombitickets;
+   
+    });
+}
+
+
 
   title = 'gustavo';
 }

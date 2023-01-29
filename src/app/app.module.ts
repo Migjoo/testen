@@ -58,6 +58,7 @@ import { RechnungenComponent } from './rechnungen/rechnungen.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { KalkulationComponent } from './kalkulation/kalkulation.component';
+import { RechnungssuchenComponent } from './rechnungssuchen/rechnungssuchen.component';
 
 
 const meineRouten: Routes = [
@@ -67,6 +68,7 @@ const meineRouten: Routes = [
   { path: "", component: StartseiteComponent },
   { path: "startseite", component: StartseiteComponent },
   { path: "rg", component: RechnungenComponent },
+  { path: "rgx", component: RechnungssuchenComponent },
 ]; //Array von Routen
 
 @NgModule({
@@ -79,7 +81,8 @@ const meineRouten: Routes = [
     BuchungsuebersichtComponent,
     BuchungfindenComponent,
     RechnungenComponent,
-    KalkulationComponent
+    KalkulationComponent,
+    RechnungssuchenComponent
   ],
   imports: [
     RouterModule.forRoot(meineRouten),

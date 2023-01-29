@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DatenbankService } from '../DI/datenbank.service';
 import { Kombiticket } from '../Domain/kombiticket';
+import { Bucher } from '../Domain/bucher';
 
 interface kombi {
   id: string;
@@ -17,13 +18,17 @@ interface Zahlung {
   value: string;
   viewValue: string;
 }
-
+interface buc{
+  id: string;
+  name: string;
+}
 @Component({
   selector: 'app-neue-buchung',
   templateUrl: './neue-buchung.component.html',
   styleUrls: ['./neue-buchung.component.scss'],
 })
 export class NeueBuchungComponent   implements OnInit{
+  auswahlBucher="";
   sender:boolean=false;
   @ViewChild('nachname') nachname!: ElementRef;
   @ViewChild('vorname') vorname!: ElementRef;
@@ -48,6 +53,8 @@ export class NeueBuchungComponent   implements OnInit{
   @ViewChild('auswahlT') auswahlT!: ElementRef;
 
   constructor(private http: HttpClient, public daten: DatenbankService) {}
+  
+  
   ngOnInit(): void {
     this.daten.getListeKombiticket().then(() => {
       this.listeKombiticket = this.daten.listeKombitickets;
@@ -55,10 +62,17 @@ export class NeueBuchungComponent   implements OnInit{
         this.kombitickets.push({id: i.ID, name: i.Kombiticket});
       }
       });
+      this.daten.getListeBucher().then(() => {
+        this.listeBucher = this.daten.listeBucher;
+        for(let i of this.listeBucher){
+          this.bucher.push({id: i.ID, name: i.Bucher});
+        }
+      });
   }
 
   public kombitickets: kombi[]= [];
-
+  public bucher : buc[]=[];
+  public listeBucher: Bucher[]=[];
 
 
   auswahlZahlungsart:string ="";

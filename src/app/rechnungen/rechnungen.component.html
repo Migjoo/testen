@@ -1,7 +1,5 @@
-<input #filterNr>
-<button mat-raised-button (click)="filtern()" >Filter Rechnungsnummer </button>
-<input #filterNa>
-<button mat-raised-button (click)="filterMitNachname()">Filter Nachname </button>
+<input #filterNr (input)="filtern()">
+
 <ngx-pagination-controls pagination-controls></ngx-pagination-controls>
 <table>
     <thead>

@@ -18,16 +18,7 @@ listeMitFilter: Rechnung[]=[];
   constructor(public daten: DatenbankService) { 
     this.liste= [new Rechnung()];
   }
-  filterMitNachname(){
-    let test = this.filterNachname.nativeElement.value;
-    let zwischenspeicher: Rechnung[] = [];
-    for(let i of this.liste) {
-      if(i.nachname == test) {
-        zwischenspeicher.push(i);
-      }
-    }
-    this.listeMitFilter = zwischenspeicher;
-  }
+
 
   ngOnInit(): void {
     this.liste = this.daten.getRechnungen();
@@ -48,11 +39,10 @@ nextPage(){
     let test = this.filterVariable.nativeElement.value;
     let zwischenspeicher: Rechnung[] = [];
     for(let i of this.liste) {
-      if(i.Rechnungsnummer == test) {
+      if(i.Rechnungsnummer.includes(test) || i.nachname.includes(test)) {
         zwischenspeicher.push(i);
       }
     }
     this.listeMitFilter = zwischenspeicher;
   }
- 
 }

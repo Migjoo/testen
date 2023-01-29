@@ -1,4 +1,4 @@
-<input #filterNr (input)="filtern()">
+<input #filterNr id="meineId" (input)="filtern()">
 
 <ngx-pagination-controls pagination-controls></ngx-pagination-controls>
 <table>
@@ -15,7 +15,7 @@
       <th>Rest</th>
     </tr>
   </thead>
-    <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 5, currentPage: p }">
+    <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 10, currentPage: p }">
       <td><input [ngModel]="i.nachname"  ></td>
       <td><input [ngModel]="i.zahlungsziel" ></td>
       <td><input [ngModel]="i.Rechnungsnummer" ></td>
@@ -27,6 +27,7 @@
       <td><input [ngModel]="i.rest" ></td>
     </tr>
   </table>
+ <p>Seite {{p}}</p>
   <button mat-raised-button (click)="previousPage()">Previous Page</button>
 <button mat-raised-button (click)="nextPage()">Next Page</button>
 <br>

@@ -47,10 +47,22 @@ input:focus{
 
 
 #meineId {
+  font-size: 15px;
   color: rgb(0, 0, 0);
   width: 100%;
   height: 50px;
   border-bottom: 2px solid rgb(105, 27, 27);
+  background-image: url('/assets/searchicon.svg');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
   
- 
+}
+#left{
+  float: right;
+  margin-left: 10px;
+}
+#right{
+  float: right;
+  margin-left: 10px;
 }

@@ -48,5 +48,16 @@ export class DatenbankService {
     });
   }
   
+  sendeMail(data:any){
+    this.http
+    .post('http://localhost:3000/buchung', data, {
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    })
+    .subscribe((response) => {
+      console.log(response);
+    });
+
+  }
+  
 
 }

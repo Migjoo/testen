@@ -1,4 +1,7 @@
-
+<input id="meineId" #datumF placeholder="Bitte wählen Sie ein Datum aus" type="text">
+<button mat-raised-button (click)="filterDatum()" >Filter Rechnungsnummer </button>
+<br>
+<br>
 <table>
   <thead>
   <tr>
@@ -13,8 +16,8 @@
     <th>Vermerk</th>
   </tr>
 </thead>
-  <tr *ngFor="let i of liste">
-    <td><input [ngModel]="i.tag"  ></td>
+  <tr *ngFor="let i of listeAnzeige">
+    <td><input [ngModel]="i.tag" ></td>
     <td><input [ngModel]="i.nameAktion" ></td>
     <td><input [ngModel]="i.personen" ></td>
     <td><input [ngModel]="i.Max" ></td>

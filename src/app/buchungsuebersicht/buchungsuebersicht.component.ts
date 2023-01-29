@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild,  ElementRef} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -15,7 +15,9 @@ import { DatenbankService } from '../DI/datenbank.service';
   styleUrls: ['./buchungsuebersicht.component.scss']
 })
 export class BuchungsuebersichtComponent  implements OnInit {
+  @ViewChild("datumF") filterVariable!: ElementRef;
   public liste: Buchungen[] =  [new Buchungen(), new Buchungen()];
+  public listeAnzeige: Buchungen[]=[];
 
   constructor(public daten: DatenbankService){
 
@@ -23,13 +25,23 @@ export class BuchungsuebersichtComponent  implements OnInit {
   }
   ngOnInit(): void {
     this.liste= this.daten.listeBuchungen;
+    this.listeAnzeige=this.liste;
 
   }
   setListe(){
-
     this.daten.setListeBuchungen(JSON.parse(JSON.stringify(this.liste)));
    }
+   filterDatum(){
+    let test: string= this.filterVariable.nativeElement.value;
 
+    let zwischenspeicher: Buchungen[] = [];
+    for(let i of this.liste) {
+      if(i.tag == test) {
+        zwischenspeicher.push(i);
+      }
+    }
+   this.listeAnzeige=zwischenspeicher;
+   }
  
 }
 

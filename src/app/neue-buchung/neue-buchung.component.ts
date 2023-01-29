@@ -136,9 +136,9 @@ auswahlTicket="";
     let strasse = this.straße.nativeElement.value;
     let datum= this.da.nativeElement.innerHTML;
     let tel= this.te.nativeElement.innerHTML;  
-    let nummer= this.nummer.nativeElement.innerHTML;
-    let plz= this.plz.nativeElement.innerHTML;
-    let ort= this.ort.nativeElement.innerHTML;
+    let nummer= this.nummer.nativeElement.value;
+    let plz= this.plz.nativeElement.value;
+    let ort= this.ort.nativeElement.value;
     let anzahl= this.peanzahl.nativeElement.innerHTML;
     
     const data = {
@@ -162,13 +162,7 @@ auswahlTicket="";
       "privatKunde": "true",
       "anzahlung": "false" 
   };
-    this.http
-      .post('http://localhost:3000/buchung', data, {
-        headers: { 'Access-Control-Allow-Origin': '*' },
-      })
-      .subscribe((response) => {
-        console.log(response);
-      });
+   this.daten.sendeMail(data);
   }
 offen(){
   this.sender= true;

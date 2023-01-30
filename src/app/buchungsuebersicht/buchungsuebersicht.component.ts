@@ -15,6 +15,7 @@ import { DatenbankService } from '../DI/datenbank.service';
   styleUrls: ['./buchungsuebersicht.component.scss']
 })
 export class BuchungsuebersichtComponent  implements OnInit {
+  p=1;
   @ViewChild("datumF") filterVariable!: ElementRef;
   public liste: Buchungen[] =  [new Buchungen(), new Buchungen()];
   public listeAnzeige: Buchungen[]=[];
@@ -42,6 +43,12 @@ export class BuchungsuebersichtComponent  implements OnInit {
     }
     this.listeAnzeige = zwischenspeicher;
    }
+   nextPage(){
+    this.p++;
+    }
+    previousPage(){
+    this.p--;
+    }
    }
   
  

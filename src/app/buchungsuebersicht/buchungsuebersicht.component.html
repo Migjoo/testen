@@ -1,7 +1,8 @@
-<input id="meineId" #datumF (input)="filterDatum()" placeholder="Bitte wählen Sie ein Datum aus" type="text">
+<input id="meineId" #datumF (input)="filterDatum()" placeholder="Suche..." type="text">
 
 <br>
 <br>
+<ngx-pagination-controls pagination-controls></ngx-pagination-controls>
 
 <table>
   <thead>
@@ -17,7 +18,7 @@
     <th>Vermerk</th>
   </tr>
 </thead>
-  <tr *ngFor="let i of listeAnzeige">
+  <tr *ngFor="let i of listeAnzeige | paginate: { itemsPerPage: 10, currentPage: p }">
     <td><input [ngModel]="i.tag" ></td>
     <td><input [ngModel]="i.nameAktion" ></td>
     <td><input [ngModel]="i.personen" ></td>
@@ -29,4 +30,11 @@
     <td><input [ngModel]="i.Vermerk" ></td>
   </tr>
 </table>
+<br>
+<i>Seite {{p}}</i>
+<button mat-raised-button id="right"  (click)="nextPage()">Weiter</button>
+<button mat-raised-button id="left" (click)="previousPage()">Zurück</button>
+
+<br>
+<br>
 <button mat-raised-button (click)="setListe()">Set List</button>

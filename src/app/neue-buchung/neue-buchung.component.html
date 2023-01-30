@@ -181,13 +181,28 @@
           <td > {{auswahlZahlungsart}}</td>
         </tr>
           </table>
-          <h1 *ngIf="sender">MIGJOMATIC</h1>
-<br>
+
+        <div *ngIf="sender">
+            <h3> PDFs wurden generiert, bitte prüfen und ggf. abschicken!</h3>
+            <h4>Mail an Leistungsträger</h4>
+            <table>
+            <tr *ngFor="let i of auswahlLeistungen"><td>{{i.Leistung}}</td>
+            <td><button igxButton="raised" (click)="mailLeistung(i.ID)">Sende Mail</button></td>
+          </tr>
+            </table>
+              <h4>Mail an Kunden</h4>
+              <table>
+                <tr><td>Gustav</td>
+                <td><button igxButton="raised" (click)="emailSenden()" >Email-Senden</button></td>
+                </tr>
+              </table>
+          </div>
+          <br>
 
 
             <button  igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
             <button igxButton="raised" (click)="offen()" class="weiter">BESTÄTIGEN</button>
-            <button igxButton="raised" (click)="emailSenden()" >Email-Senden</button>
+
         </div>
     </div>
 </igx-step>

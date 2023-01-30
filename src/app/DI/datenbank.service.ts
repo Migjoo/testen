@@ -44,6 +44,8 @@ export class DatenbankService {
         headers: { 'Access-Control-Allow-Origin': '*' },
       })
       .subscribe(response => {
+        console.log("!das");
+        console.log(response);
         this.listeKombitickets = response;
         resolve(this.listeKombitickets);
       }, error => {
@@ -58,13 +60,25 @@ export class DatenbankService {
         headers: { 'Access-Control-Allow-Origin': '*' },
       })
       .subscribe(response => {
-        console.log(response);
         this.listeBucher = response;
         resolve(this.listeBucher);
       }, error => {
         reject("Klappt nicht -> BucherListe");
       });
     });
+  }
+  getListeLeistungen(){
+    return new Promise((resolve, reject) => {
+      this.http.get<Leistung[]>('http://localhost:3000/leistung', {
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      })
+      .subscribe(response => {
+     this.listeLeistungen = response;
+     resolve(this.listeLeistungen);
+      }, error => {
+      reject("Klappt nicht -> LeistungenListe");
+      });
+      });
   }
   
   sendeMail(data:any){

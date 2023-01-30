@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatenbankService } from '../DI/datenbank.service';
 import { Kombiticket } from '../Domain/kombiticket';
 import { Bucher } from '../Domain/bucher';
+import { Leistung } from '../Domain/leistung';
 
 interface kombi {
   id: string;
@@ -68,6 +69,10 @@ export class NeueBuchungComponent   implements OnInit{
           this.bucher.push({id: i.ID, name: i.Bucher});
         }
       });
+      this.daten.getListeLeistungen().then(() => {
+        this.listeLeistungen = this.daten.listeLeistungen;
+      });
+ 
   }
 
   public kombitickets: kombi[]= [];
@@ -79,7 +84,7 @@ export class NeueBuchungComponent   implements OnInit{
   public auswahl: string = '';
   public listeKombiticket: Kombiticket[]=[];
   public auswahlKombiticket: string= "";
-
+public listeLeistungen: Leistung[]=[];
 auswahlTicket="";
   foods: Food[] = [
     { value: 'Reservierung', viewValue: 'Reservierung' },
@@ -177,13 +182,28 @@ auswahlTicket="";
   };
    this.daten.sendeMail(data);
   }
+
+ auswahlLeistungen: Leistung[]=[]; 
 offen(){
   this.sender= true;
-  this.daten.getListeKombiticket().then(() => {
-    this.listeKombiticket = this.daten.listeKombitickets;
-   
-    });
+  for(let i of this.listeKombiticket){
+
+    if(i.ID == this.auswahlKombiticket){
+      console.log(this.listeLeistungen [1]+ " "+ i.Leistung1);
+      for(let j of this.listeLeistungen){
+        if(j.ID==i.Leistung1||j.ID==i.Leistung2||j.ID==i.Leistung3||j.ID==i.Leistung4||j.ID==i.Leistung5||
+          j.ID==i.Leistung7){
+          this.auswahlLeistungen.push(j);
+        }
+      }
+    }
+  }
+  console.log(this.auswahlLeistungen);
+
 }
+  mailLeistung(id: string){
+  console.log(id);
+  }
 
 
 

@@ -19,17 +19,13 @@
       <th>Rest</th>
     </tr>
   </thead>
+
     <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 10, currentPage: p }">
-      <td><input [ngModel]="i.nachname"  ></td>
-      <td><input [ngModel]="i.zahlungsziel" ></td>
-      <td><input [ngModel]="i.Rechnungsnummer" ></td>
-      <td><input [ngModel]="i.Reisetermin" ></td>
-      <td><input [ngModel]="i.Rechnungsdatum" ></td>
-      <td><input [ngModel]="i.Reiseziel" ></td>
-      <td><input [ngModel]="i.Personenzahl" ></td>
-      <td><input [ngModel]="i.gesamt" ></td>
-      <td><input [ngModel]="i.rest" ></td>
+      <td><input [ngModel]="i.ID"  ></td>
+      <td><input [ngModel]="i.kunde" ></td>
+
     </tr>
+
   </table>
   <br>
   <i>Seite {{p}}</i>

@@ -11,23 +11,26 @@ export class RechnungenComponent implements OnInit {
   @ViewChild("filterNr") filterVariable!: ElementRef;
   @ViewChild("filterNa") filterNachname!: ElementRef;
 
-liste : Rechnung [];
+liste : Rechnung []=[];
 p=1;
 listeMitFilter: Rechnung[]=[];
 
   constructor(public daten: DatenbankService) { 
-    this.liste= [new Rechnung()];
+
   }
 
 
   ngOnInit(): void {
-    this.liste = this.daten.getRechnungen();
-    this.listeMitFilter= this.liste;
+    this.daten.getListeRechnungen().then(() => {
+      this.liste = this.daten.listeRechnungen;
+      this.listeMitFilter= this.liste;
+    });
+  console.log(this.liste + "huist"+ this.listeMitFilter);
   
   }
 setRechnungen(){
-  this.liste.push(new Rechnung());
-  this.daten.setListeRechnungen(this.liste);
+ // this.liste.push(new Rechnung());
+//  this.daten.setListeRechnungen(this.liste);
 }
 nextPage(){
   this.p++;
@@ -38,11 +41,11 @@ nextPage(){
   filtern() {
     let test = this.filterVariable.nativeElement.value;
     let zwischenspeicher: Rechnung[] = [];
-    for(let i of this.liste) {
-      if(i.Rechnungsnummer.includes(test) || i.nachname.includes(test)) {
-        zwischenspeicher.push(i);
-      }
-    }
-    this.listeMitFilter = zwischenspeicher;
+ for(let i of this.liste) {
+  if(i.ID.includes(test) || i.kunde.includes(test)) {
+     zwischenspeicher.push(i);
+   }
+  }
+ this.listeMitFilter = zwischenspeicher;
   }
 }

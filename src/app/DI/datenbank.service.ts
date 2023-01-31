@@ -13,6 +13,7 @@ export class DatenbankService {
   listeKombitickets: Kombiticket[]=[];
   listeLeistungen: Leistung[]=[];
   listeBucher: Bucher[]=[];
+  listeRechnungen: Rechnung[]=[];
 
   listeBuchungen: Buchungen[] = [
     new Buchungen(),
@@ -21,10 +22,29 @@ export class DatenbankService {
     new Buchungen(),
     new Buchungen()
   ];
-  listeRechnungen: Rechnung[]=
-  [new Rechnung(), new Rechnung(), new Rechnung];
+
 
   constructor(public http: HttpClient) { }
+
+getListeRechnungen(): Promise<Rechnung[]> {
+  console.log("start");
+  return new Promise((resolve, reject) => {
+    this.http.get<Rechnung[]>('http://localhost:3000/Rechnung', {
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    })
+    .subscribe(response => {
+      console.log("Rechnung");
+      console.log(response);
+      this.listeRechnungen=response;
+      console.log(this.listeRechnungen);
+    resolve(this.listeRechnungen);
+    }, error => {
+      reject("Klappt nicht -> KombiticketListe");
+    });
+  });
+
+}
+
   getBuchungen(){
     return this.listeBuchungen;
   }
@@ -32,12 +52,8 @@ export class DatenbankService {
     this.listeBuchungen= [new Buchungen()];
   this.listeBuchungen = liste;
   }
-  getRechnungen(){
-    return this.listeRechnungen;
-  }
-  setListeRechnungen(liste: Rechnung[]){
-  this.listeRechnungen= liste;
-  }
+
+
   getListeKombiticket(): Promise<Kombiticket[]> {
     return new Promise((resolve, reject) => {
       this.http.get<Kombiticket[]>('http://localhost:3000/kombiticket', {

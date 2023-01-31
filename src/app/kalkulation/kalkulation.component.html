@@ -1,1 +1,81 @@
-<p>kalkulation works!</p>
+<table *ngFor="let i of listeKalkulation">
+    <tr>
+        <th > <h3>Kalkulation {{i.rechnung.ID}}</h3></th>
+      
+      </tr>
+    <tr>
+      <th>Leistungen</th>
+      <th>Pers.</th>
+      <th>Einzelpreis</th>
+      <th>Gesamtpreis</th>
+    </tr>
+    <tr *ngIf="i.Leistung1">
+        <td>{{i.Leistung1}}</td>
+        <td>{{i.rechnung.personenAnzahl}}</td>
+        <td> {{i.EKLeistung1}}</td>
+        <td>{{i.EKLeistung1}} * {{i.rechnung.personenAnzahl}}</td>
+      </tr>
+    <tr *ngIf="i.Leistung2">
+      <td>{{i.Leistung2}}</td>
+      <td>{{i.rechnung.personenAnzahl}}</td>
+      <td> {{i.EKLeistung2}}</td>
+      <td>{{i.EKLeistung2}} * {{i.rechnung.personenAnzahl}}</td>
+    </tr>
+    <tr *ngIf="i.Leistung3">
+        <td>{{i.Leistung3}}</td>
+        <td>{{i.rechnung.personenAnzahl}}</td>
+        <td> {{i.EKLeistung3}}</td>
+        <td>{{i.EKLeistung3}} * {{i.rechnung.personenAnzahl}}</td>
+      </tr>
+    
+      <tr *ngIf="i.Leistung4">
+        <td>{{i.Leistung4}}</td>
+        <td>{{i.rechnung.personenAnzahl}}</td>
+        <td> {{i.EKLeistung4}}</td>
+        <td>{{i.EKLeistung4}} * {{i.rechnung.personenAnzahl}}</td>
+      </tr>
+      <tr *ngIf="i.Leistung5">
+        <td>{{i.Leistung5}}</td>
+        <td>{{i.rechnung.personenAnzahl}}</td>
+        <td> {{i.EKLeistung5}}</td>
+        <td>{{i.EKLeistung5}} * {{i.rechnung.personenAnzahl}}</td>
+      </tr>
+    
+      <tr *ngIf="i.Leistung7">
+        <td>{{i.Leistung7}}</td>
+        <td>{{i.rechnung.personenAnzahl}}</td>
+        <td> {{i.EKLeistung7}}</td>
+        <td>{{i.EKLeistung7}} * {{i.rechnung.personenAnzahl}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <tr>
+      <td>Gesamt</td>
+      <td></td>
+      <td></td>
+      <td>{{i.rechnung.ek}}</td>
+    </tr>
+    <tr>
+      <td>abzgl. VK</td>
+      <td></td>
+      <td></td>
+      <td>{{i.rechnung.restzahlung}}</td>
+    </tr>
+    <tr>
+      <td>Gewinn</td>
+      <td></td>
+      <td></td>
+      <td>{{i.rechnung.gewinn}}</td>
+    </tr>
+  </table>
+  

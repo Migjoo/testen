@@ -48,4 +48,9 @@ nextPage(){
   }
  this.listeMitFilter = zwischenspeicher;
   }
+
+
+  get pageCount() {
+    return Math.ceil(this.listeMitFilter.length / 10);
+  }
 }

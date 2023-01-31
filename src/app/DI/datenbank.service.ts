@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Kombiticket } from '../Domain/kombiticket';
 import { Leistung } from '../Domain/leistung';
 import { Bucher } from '../Domain/bucher';
+import { Kalkulation } from '../Domain/kalkulation';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DatenbankService {
   listeLeistungen: Leistung[]=[];
   listeBucher: Bucher[]=[];
   listeRechnungen: Rechnung[]=[];
-
+  listeKalkulation: Kalkulation[]=[];
   listeBuchungen: Buchungen[] = [
     new Buchungen(),
     new Buchungen(),
@@ -42,8 +43,25 @@ getListeRechnungen(): Promise<Rechnung[]> {
       reject("Klappt nicht -> KombiticketListe");
     });
   });
-
 }
+
+getListeKalkulation(): Promise<Kalkulation[]> {
+  console.log("start");
+  return new Promise((resolve, reject) => {
+    this.http.get<Kalkulation[]>('http://localhost:3000/Kalkulation', {
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    })
+    .subscribe(response => {
+      this.listeKalkulation=response;
+       resolve(this.listeKalkulation);
+    }, error => {
+      reject("Klappt nicht -> KombiticketListe");
+    });
+  });
+}
+
+
+
 
   getBuchungen(){
     return this.listeBuchungen;

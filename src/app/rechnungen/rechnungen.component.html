@@ -5,30 +5,54 @@
 <br>
 
 <ngx-pagination-controls pagination-controls></ngx-pagination-controls>
-<table>
-    <thead>
-    <tr>
-      <th>Nachname</th>
-      <th>Zahlungsziel</th>
-      <th>Rechnungsnummer</th>
-      <th>Reisetermin</th>
-      <th>Rechnungsdatum</th>
-      <th>Reiseziel</th>
-      <th>Personenzahl</th>
-      <th>Gesamt</th>
-      <th>Rest</th>
-    </tr>
-  </thead>
 
-    <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 10, currentPage: p }">
-      <td><input [ngModel]="i.ID"  ></td>
-      <td><input [ngModel]="i.kunde" ></td>
+   <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Kunde</th>
+            <th>Anschrift Kunde</th>
+            <th>Anbieter</th>
+            <th>Erstellt am</th>
+            <th>Zahlungsziel</th>
+            <th>Anzahlung</th>
+            <th>Kombiticket</th>
+            <th>Personenanzahl</th>
+            <th>Restzahlung</th>
+            <th>EK</th>
+            <th>Gewinn</th>
+            <th>MwSt</th>
+            <th>Netto Gewinn</th>
+            <th>Bearbeiten</th>
+            <th>Löschen</th>
+          </tr>
+        </thead>
+
+
+  
+      <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td><input [ngModel]="i.ID" ></td>
+        <td><input [ngModel]="i.kunde" ></td>
+        <td><input [ngModel]="i.anschriftKunde" ></td>
+        <td><input [ngModel]="i.anbieter" ></td>
+        <td><input [ngModel]="i.erstelltam" ></td>
+        <td><input [ngModel]="i.zahlungsziel" ></td>
+        <td><input [ngModel]="i.anzahlung" ></td>
+        <td><input [ngModel]="i.kombiticket" ></td>
+        <td><input [ngModel]="i.personenAnzahl" ></td>
+        <td><input [ngModel]="i.restzahlung" ></td>
+        <td><input [ngModel]="i.ek" ></td>
+        <td><input [ngModel]="i.gewinn" ></td>
+        <td><input [ngModel]="i.mwst" ></td>
+        <td><input [ngModel]="i.nettoGewinn" ></td>
+      <td style="text-align: center"> <mat-icon style="font-size: 36px" >delete</mat-icon></td>
+      <td style="text-align: center"><mat-icon style="font-size: 36px">create</mat-icon></td>
 
     </tr>
 
   </table>
   <br>
-  <i>Seite {{p}}</i>
+  <i>Seite {{p}} von {{pageCount}}</i>
   <button mat-raised-button id="right"  (click)="nextPage()">Weiter</button>
   <button mat-raised-button id="left" (click)="previousPage()">Zurück</button>
   

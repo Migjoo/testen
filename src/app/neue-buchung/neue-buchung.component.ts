@@ -146,8 +146,9 @@ auswahlTicket="";
 
 
 
-
+laedt: boolean= false;
   emailSenden(): void {
+    this.laedt=true;
     let email= this.em.nativeElement.innerHTML;
     let vorname= this.vn.nativeElement.innerHTML;
     let nachname= this.nn.nativeElement.innerHTML;
@@ -181,6 +182,7 @@ auswahlTicket="";
       "anzahlung": "false" 
   };
    this.daten.sendeMail(data);
+   this.laedt = false;
   }
 
  auswahlLeistungen: Leistung[]=[]; 

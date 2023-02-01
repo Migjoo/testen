@@ -1,4 +1,8 @@
-<table *ngFor="let i of listeKalkulation">
+
+
+<ngx-pagination-controls pagination-controls></ngx-pagination-controls>
+
+<table *ngFor="let i of listeKalkulation  | paginate: { itemsPerPage: 2, currentPage: p }">
     <tr>
         <th > <h3>Kalkulation {{i.rechnung.ID}}</h3></th>
       
@@ -78,4 +82,6 @@
       <td>{{i.rechnung.gewinn}}</td>
     </tr>
   </table>
-  
+  <i>Seite {{p}} von {{pageCount}}</i>
+  <button mat-raised-button id="left" (click)="previousPage()">Zurück</button>
+  <button mat-raised-button id="right"  (click)="nextPage()" >Weiter</button>

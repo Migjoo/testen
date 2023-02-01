@@ -9,6 +9,7 @@ import { Kalkulation } from '../Domain/kalkulation';
   styleUrls: ['./kalkulation.component.scss']
 })
 export class KalkulationComponent implements OnInit {
+  p=1;
   constructor(public daten: DatenbankService) { }
   listeKalkulation: Kalkulation[]=[];
     ngOnInit(): void {
@@ -17,5 +18,13 @@ export class KalkulationComponent implements OnInit {
         console.log(this.listeKalkulation);
       });
   }
-
+  nextPage(){
+    this.p++;
+    }
+    previousPage(){
+    this.p--;
+    }
+    get pageCount() {
+      return Math.ceil(this.listeKalkulation.length / 10);
+    }
 }

@@ -23,8 +23,8 @@
             <th>Gewinn</th>
             <th>MwSt</th>
             <th>Netto Gewinn</th>
-            <th>Bearbeiten</th>
             <th>Löschen</th>
+            <th>Bearbeiten</th>
           </tr>
         </thead>
 
@@ -45,18 +45,19 @@
         <td><input [ngModel]="i.gewinn" ></td>
         <td><input [ngModel]="i.mwst" ></td>
         <td><input [ngModel]="i.nettoGewinn" ></td>
-      <td style="text-align: center"> <mat-icon style="font-size: 36px" >delete</mat-icon></td>
-      <td style="text-align: center"><mat-icon style="font-size: 36px">create</mat-icon></td>
-
+      <td style=" cursor:pointer;text-align: center" (click)="delete(i)"> 
+        <mat-icon style="font-size: 36px" >delete</mat-icon></td>
+      <td style="cursor:pointer;text-align: center" (click)="bearbeite(i)" >
+        <mat-icon style="font-size: 36px">create</mat-icon></td>
     </tr>
-
   </table>
   <br>
   <i>Seite {{p}} von {{pageCount}}</i>
-  <button mat-raised-button id="right"  (click)="nextPage()">Weiter</button>
+  <br>
+  <br>
+  <button mat-raised-button id="right"  (click)="nextPage()" >Weiter</button>
   <button mat-raised-button id="left" (click)="previousPage()">Zurück</button>
   
   <br>
   <br>
-
-  <button mat-raised-button (click)="setRechnungen()">Set Rechnungen</button>
+<h4>SQL-Befehl: {{sql}}</h4>

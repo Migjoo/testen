@@ -18,7 +18,7 @@ listeMitFilter: Rechnung[]=[];
   constructor(public daten: DatenbankService) { 
 
   }
-
+sql: string="";
 
   ngOnInit(): void {
     this.daten.getListeRechnungen().then(() => {
@@ -52,5 +52,12 @@ nextPage(){
 
   get pageCount() {
     return Math.ceil(this.listeMitFilter.length / 10);
+  }
+  bearbeite(i: Rechnung){
+    this.sql;
+    console.log(i);
+  }
+  delete(i: Rechnung){
+    this.sql= ""+" DELETE FROM Rechnung WHERE ID = '"+ i.ID+ "';";
   }
 }

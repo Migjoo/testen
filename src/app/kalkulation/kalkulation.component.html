@@ -83,5 +83,5 @@
     </tr>
   </table>
   <i>Seite {{p}} von {{pageCount}}</i>
-  <button mat-raised-button id="left" (click)="previousPage()">Zurück</button>
+  <button mat-raised-button id="left" (click)="previousPage()" *ngIf="p>1">Zurück</button>
   <button mat-raised-button id="right"  (click)="nextPage()" >Weiter</button>

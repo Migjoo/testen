@@ -27,9 +27,6 @@
             <th>Bearbeiten</th>
           </tr>
         </thead>
-
-
-  
       <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 10, currentPage: p }">
         <td><input [ngModel]="i.ID" ></td>
         <td><input [ngModel]="i.kunde" ></td>
@@ -56,7 +53,7 @@
   <br>
   <br>
   <button mat-raised-button id="right"  (click)="nextPage()" >Weiter</button>
-  <button mat-raised-button id="left" (click)="previousPage()">Zurück</button>
+  <button mat-raised-button id="left" (click)="previousPage()" *ngIf="p>1">Zurück</button>
   
   <br>
   <br>

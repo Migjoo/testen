@@ -6,6 +6,7 @@ import { DatenbankService } from '../DI/datenbank.service';
 import { Kombiticket } from '../Domain/kombiticket';
 import { Bucher } from '../Domain/bucher';
 import { Leistung } from '../Domain/leistung';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface kombi {
   id: string;
@@ -53,7 +54,7 @@ export class NeueBuchungComponent   implements OnInit{
   @ViewChild('peanzahl') peanzahl!: ElementRef;
   @ViewChild('auswahlT') auswahlT!: ElementRef;
 
-  constructor(private http: HttpClient, public daten: DatenbankService) {}
+  constructor(private http: HttpClient, public daten: DatenbankService, private snackBar: MatSnackBar) {}
   
   
   ngOnInit(): void {
@@ -145,9 +146,12 @@ auswahlTicket="";
 
 
 
-
+  gesendet=false;
 laedt: boolean= false;
   emailSenden(): void {
+    this.snackBar.open("Email wird gesendet", "Cancel", {
+      duration: 100000,
+    });
     this.laedt=true;
     let email= this.em.nativeElement.innerHTML;
     let vorname= this.vn.nativeElement.innerHTML;
@@ -183,6 +187,7 @@ laedt: boolean= false;
   };
    this.daten.sendeMail(data);
    this.laedt = false;
+   this.gesendet= true;
   }
 
  auswahlLeistungen: Leistung[]=[]; 

@@ -67,7 +67,7 @@
       <div igxStepContent>
           <div class="sample-step-actions">  
             <br>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" style= "width: 500px;">
               <mat-label>Kombiticket</mat-label>
               <mat-select [(ngModel)]="auswahlKombiticket">
                 <mat-option *ngFor="let food of kombitickets" [value]="food.id">
@@ -141,49 +141,50 @@
           
           <table  style="width: 100px;">
             <tr>
-              <td >Vorname: </td>
+              <td ><b>Vorname:</b> </td>
               <td #vn > </td>
             </tr>
             <tr >
-              <td >Nachname: </td>
+              <td ><b>Nachname: </b></td>
               <td #nn> </td>
             </tr>
             <tr>
-            <td >Straße und Hausnummer: </td>
+            <td ><b>Straße und Hausnummer:</b> </td>
             <td #stn> </td>
           </tr>
           <tr >
-            <td >PLZ und Wohnort: </td>
+            <td ><b>PLZ und Wohnort:</b> </td>
             <td #add> </td>
           </tr>
           <tr>
-            <td >Telefonnummer: </td>
+            <td ><b>Telefonnummer:</b> </td>
             <td #te> </td>
           </tr>
           <tr >
-            <td >Email: </td>
+            <td ><b>Email:</b> </td>
             <td #em> </td>
           </tr>
           <tr>
-            <td >Datum und Uhrzeit: </td>
+            <td ><b>Datum und Uhrzeit:</b> </td>
             <td #da> </td>
           </tr>
           <tr >
-            <td >Ticketart: </td>
+            <td ><b>Ticketart:</b> </td>
             <td > {{auswahlTicket}}</td>
           </tr>
           <tr>
-          <td >Personenanzahl: </td>
+          <td ><b>Personenanzahl: </b></td>
           <td #peanzahl> </td>
         </tr>
         <tr >
-          <td >Zahlungsart: </td>
+          <td ><b>Zahlungsart:</b> </td>
           <td > {{auswahlZahlungsart}}</td>
         </tr>
           </table>
 
         <div *ngIf="sender">
-            <h3> PDFs wurden generiert, bitte prüfen und ggf. abschicken!</h3>
+            <h5> PDFs wurden generiert, bitte prüfen und ggf. abschicken!</h5>
+            <p *ngIf="gesendet">Email gesendet</p>
             <h4>Mail an Leistungsträger</h4>
             <table>
             <tr *ngFor="let i of auswahlLeistungen"><td>{{i.Leistung}}</td>
@@ -192,11 +193,11 @@
             </table>
               <h4>Mail an Kunden</h4>
               <table>
-                <tr><td>Gustav</td>
+                <tr><td>Kunde</td>
                 <td><button igxButton="raised" (click)="emailSenden()" >Email-Senden</button></td>
                 </tr>
               </table>
-              <p *ngIf="laedt">Email lädt...</p>
+           
           </div>
           <br>
 

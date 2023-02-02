@@ -52,7 +52,7 @@
   <i>Seite {{p}} von {{pageCount}}</i>
   <br>
   <br>
-  <button mat-raised-button id="right"  (click)="nextPage()" >Weiter</button>
+  <button mat-raised-button id="right"  (click)="nextPage()" *ngIf="p>10" >Weiter</button>
   <button mat-raised-button id="left" (click)="previousPage()" *ngIf="p>1">Zurück</button>
   
   <br>

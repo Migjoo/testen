@@ -25,6 +25,6 @@ export class KalkulationComponent implements OnInit {
     this.p--;
     }
     get pageCount() {
-      return Math.ceil(this.listeKalkulation.length / 10);
+      return Math.ceil(this.listeKalkulation.length / 2);
     }
 }

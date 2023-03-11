@@ -30,7 +30,10 @@ interface buc{
   styleUrls: ['./neue-buchung.component.scss'],
 })
 export class NeueBuchungComponent   implements OnInit{
+  istFirmenkunde= false;
+  leistungSelected: { [id: string]: boolean } = {};
   auswahlBucher="";
+  bearbeiter: string = '';
   sender:boolean=false;
   @ViewChild('nachname') nachname!: ElementRef;
   @ViewChild('vorname') vorname!: ElementRef;
@@ -132,8 +135,21 @@ auswahlTicket="";
   public toggleModes(event: IButtonGroupEventArgs): void {
     this.linear = this.modes[event.index].linear;
   }
+  ausgewaehlteLeistungen = {};
+  leistungenName: string[] = [];
+
 
   uebersicht(): void {
+  
+ this.ausgewaehlteLeistungen = this.listeLeistungen
+  .map(leistung => this.leistungSelected[leistung.ID] ? leistung.ID.toString() : null)
+  .filter(id => id !== null);
+    console.log(this.ausgewaehlteLeistungen);
+this.leistungenName = this.listeLeistungen
+.filter(leistung => this.leistungSelected[leistung.ID])
+.map(leistung => leistung.Leistung);
+console.log(this.leistungenName);
+
     this.vn.nativeElement.innerHTML = this.vorname.nativeElement.value;
     this.nn.nativeElement.innerHTML = this.nachname.nativeElement.value;
     this.da.nativeElement.innerHTML = this.datum.nativeElement.value + ' ' + this.uhr.nativeElement.value;;
@@ -163,7 +179,7 @@ laedt: boolean= false;
     let plz= this.plz.nativeElement.value;
     let ort= this.ort.nativeElement.value;
     let anzahl= this.peanzahl.nativeElement.innerHTML;
-    
+   
     const data = {
       "vorname": vorname,
       "nachname": nachname,
@@ -180,10 +196,13 @@ laedt: boolean= false;
           "ticketArt": this.auswahlTicket,
           "zahlungsart": this.auswahlZahlungsart
       },
-      "anbieter": "Siweris",
-      "bearbeiter": "Julian Gegner",
-      "privatKunde": "true",
-      "anzahlung": "false" 
+      "anbieter": this.auswahlBucher,
+      "bearbeiter": this.bearbeiter,
+      "privatKunde": !this.istFirmenkunde,
+      "anzahlung": "false",
+      "leistungen": this.ausgewaehlteLeistungen,
+
+       
   };
    this.daten.sendeMail(data);
    this.laedt = false;

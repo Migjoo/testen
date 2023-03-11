@@ -9,6 +9,21 @@
   <igx-step>
       <span igxStepTitle>Kontaktdaten</span>
       <div igxStepContent>
+
+        <mat-radio-group [(ngModel)]="istFirmenkunde">
+          <mat-radio-button value="true">Firmenkunde</mat-radio-button>
+          <mat-radio-button value="false">Privatkunde</mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <mat-form-field>
+          <mat-label>Bearbeiter</mat-label>
+          <input matInput [(ngModel)]="bearbeiter" />
+        </mat-form-field>
+<br>
+
+<br>
+  <p *ngIf="istFirmenkunde">Bei Firmenkunden beim Nachnamen den Firmennamen angeben, Vorname und Geschlecht freilassen!</p>
+
         <mat-radio-group aria-label="Select an option">
             <mat-radio-button value="1">Herr</mat-radio-button>
             <mat-radio-button value="2">Frau</mat-radio-button>
@@ -17,6 +32,7 @@
         <br>
           <div class="sample-step-actions">   
              <mat-form-field appearance="fill">
+      
                 <mat-label>Vorname</mat-label>
                 <input #vorname matInput placeholder="Vorname"  required>
               </mat-form-field>
@@ -105,12 +121,6 @@
                    </mat-option>
               </mat-select>
               </mat-form-field>
-  
-
-
-
-
-
             <mat-form-field class="example-full-width" appearance="fill" style="width: 10%;">
                 <mat-label>Personenanzahl</mat-label>
                 <input #anzahl matInput type="number" minlength="1" maxlength="32">
@@ -126,6 +136,18 @@
                 </mat-select>
                 </mat-form-field>
                 <br>
+                <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Zusätzliche Leistungen
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let leistung of listeLeistungen">
+                      <mat-checkbox [(ngModel)]="leistungSelected[leistung.ID]">{{ leistung.Leistung }}</mat-checkbox>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
           
               <button igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
               <button igxButton="raised" (click)="stepper.next(); uebersicht()" class="weiter">WEITER</button>
@@ -179,6 +201,10 @@
         <tr >
           <td ><b>Zahlungsart:</b> </td>
           <td > {{auswahlZahlungsart}}</td>
+        </tr>
+        <tr *ngFor="let peter of leistungenName">
+          <td>Zusätzliche Leistungen</td>
+          <td>{{ peter }}</td>
         </tr>
           </table>
 

@@ -6,8 +6,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Buchungen } from '../Domain/buchungen';
 import { DatenbankService } from '../DI/datenbank.service';
-
-
+import { Kombiticket } from '../Domain/kombiticket';
+import { Leistung } from '../Domain/leistung';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
  @Component({
   selector: 'app-buchungsuebersicht',
@@ -15,40 +16,64 @@ import { DatenbankService } from '../DI/datenbank.service';
   styleUrls: ['./buchungsuebersicht.component.scss']
 })
 export class BuchungsuebersichtComponent  implements OnInit {
-  p=1;
-  @ViewChild("datumF") filterVariable!: ElementRef;
-  public liste: Buchungen[] =  [new Buchungen(), new Buchungen()];
-  public listeAnzeige: Buchungen[]=[];
-
-  constructor(public daten: DatenbankService){
-
+  customerForm: FormGroup;
+  constructor(public daten: DatenbankService, private formBuilder: FormBuilder){
+    this.customerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      address: [''],
+      zipCode: [''],
+      street: [''],
+      houseNumber: [''],
+      services: [[]],
+      comboTicket: [''],
+      date: [''],
+      time: [''],
+    });
 
   }
+  listeKombiticket: Kombiticket[]=[];
+  listeLeistungen: Leistung[]=[];
   ngOnInit(): void {
-    this.liste= this.daten.listeBuchungen;
-    this.listeAnzeige=this.liste;
-
+    this.daten.getListeKombiticket().then(() => {
+      this.listeKombiticket = this.daten.listeKombitickets;
+     
+      });
+    
+      this.daten.getListeLeistungen().then(() => {
+        this.listeLeistungen = this.daten.listeLeistungen;
+      });
+   
   }
-  setListe(){
-    this.daten.setListeBuchungen(JSON.parse(JSON.stringify(this.liste)));
-   }
-   filterDatum(){
-    let test = this.filterVariable.nativeElement.value;
-    let zwischenspeicher: Buchungen[] = [];
-    for(let i of this.liste) {
-      
-      if(i.tag.includes(test) || i.nameAktion.includes(test) ) {
-        zwischenspeicher.push(i);
-      }
-    }
-    this.listeAnzeige = zwischenspeicher;
-   }
-   nextPage(){
-    this.p++;
-    }
-    previousPage(){
-    this.p--;
-    }
+  onSubmit() {
+    const email = 'Migjomatic@gmail.com';
+    const subject = 'Kundenanfrage';
+    const services = this.customerForm.get('services')?.value?.map((service:any) => service.Leistung)?.join('\n- ');
+
+    const comboTicket = this.customerForm.get('comboTicket')?.value;
+    const date = this.customerForm.get('date')?.value;
+    const time = this.customerForm.get('time')?.value;
+    const noServicesMessage = 'Keine Leistungen dazugebucht.';
+    const servicesList = services ? `- ${services}` : noServicesMessage;
+    const body = `Guten Tag, ich bitte um ein Angebot für folgende Dienstleistungen: 
+      ${servicesList} ${comboTicket ? '- Kombiticket: ' + comboTicket.Kombiticket : ''} ${date ? '- Wunschdatum: ' + date : ''} ${time ? '- Wunschzeit: ' + time : ''}
+      Ich würde mich über eine schnelle Rückmeldung freuen.
+    
+      Mit freundlichen Grüßen,
+      ${this.customerForm.get('firstName')?.value ?? ''} ${this.customerForm.get('lastName')?.value ?? ''}`;
+    
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+}
+
+  
+  
+  
+  
+  
+  test(){
+    console.log(this.customerForm);
+  }
    }
   
  

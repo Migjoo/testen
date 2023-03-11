@@ -1,40 +1,58 @@
-<input id="meineId" #datumF (input)="filterDatum()" placeholder="Suche..." type="text">
-
-<br>
-<br>
-<ngx-pagination-controls pagination-controls></ngx-pagination-controls>
-
-<table>
-  <thead>
-  <tr>
-    <th>Tag</th>
-    <th>Aktion</th>
-    <th>Personen</th>
-    <th>Max</th>
-    <th>Rest</th>
-    <th>Web</th>
-    <th>JS</th>
-    <th>MD</th>
-    <th>Vermerk</th>
-  </tr>
-</thead>
-  <tr *ngFor="let i of listeAnzeige | paginate: { itemsPerPage: 10, currentPage: p }">
-    <td><input [ngModel]="i.tag" ></td>
-    <td><input [ngModel]="i.nameAktion" ></td>
-    <td><input [ngModel]="i.personen" ></td>
-    <td><input [ngModel]="i.Max" ></td>
-    <td><input [ngModel]="i.Rest" ></td>
-    <td><input [ngModel]="i.Web" ></td>
-    <td><input [ngModel]="i.JS" ></td>
-    <td><input [ngModel]="i.MD" ></td>
-    <td><input [ngModel]="i.Vermerk" ></td>
-  </tr>
-</table>
-<br>
-<i>Seite {{p}}</i>
-<button mat-raised-button id="right"  (click)="nextPage()" *ngIf="p>10">Weiter</button>
-<button mat-raised-button id="left" (click)="previousPage()" *ngIf="p>1">Zurück</button>
-
-<br>
-<br>
-<button mat-raised-button (click)="setListe()">Set List</button>
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Vorname</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Nachname</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="address">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>PLZ</mat-label>
+      <input matInput formControlName="zipCode">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Straße</mat-label>
+      <input matInput formControlName="street">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Hausnummer</mat-label>
+      <input matInput formControlName="houseNumber">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Leistung</mat-label>
+      <mat-select formControlName="services" multiple>
+        <mat-option *ngFor="let service of listeLeistungen" [value]="service">{{service.Leistung}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Kombiticket</mat-label>
+      <mat-select formControlName="comboTicket">
+        <mat-option *ngFor="let ticket of listeKombiticket" [value]="ticket">{{ticket.Kombiticket}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Datum</mat-label>
+        <input matInput formControlName="date" type="date">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Uhrzeit</mat-label>
+        <input matInput formControlName="time" type="time">
+      </mat-form-field>
+    
+    <button mat-raised-button type="submit">Speichern</button>
+    <button mat-raised-button (click)="test()">Testbutton</button>
+  </form>
+  

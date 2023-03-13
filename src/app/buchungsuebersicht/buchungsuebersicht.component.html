@@ -1,3 +1,5 @@
+
+<h2>Kundenanfrage</h2>
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Vorname</mat-label>
@@ -51,8 +53,9 @@
         <mat-label>Uhrzeit</mat-label>
         <input matInput formControlName="time" type="time">
       </mat-form-field>
-    
-    <button mat-raised-button type="submit">Speichern</button>
-    <button mat-raised-button (click)="test()">Testbutton</button>
+    <br>
+    <br>
+    <br>
+   
+    <button mat-raised-button type="submit" >Anfrage senden</button>
   </form>
-  

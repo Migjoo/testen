@@ -9,7 +9,7 @@
    <table>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Rechnungsnummer</th>
             <th>Kunde</th>
             <th>Anschrift Kunde</th>
             <th>Anbieter</th>
@@ -23,29 +23,45 @@
             <th>Gewinn</th>
             <th>MwSt</th>
             <th>Netto Gewinn</th>
-            <th>Löschen</th>
-            <th>Bearbeiten</th>
+            <th>Ticketart</th>
+            <th>Erledigt</th>
+            <th>PDF</th>
           </tr>
         </thead>
       <tr *ngFor="let i of listeMitFilter | paginate: { itemsPerPage: 10, currentPage: p }">
-        <td><input [ngModel]="i.ID" ></td>
-        <td><input [ngModel]="i.kunde" ></td>
-        <td><input [ngModel]="i.anschriftKunde" ></td>
-        <td><input [ngModel]="i.anbieter" ></td>
-        <td><input [ngModel]="i.erstelltam" ></td>
-        <td><input [ngModel]="i.zahlungsziel" ></td>
-        <td><input [ngModel]="i.anzahlung" ></td>
-        <td><input [ngModel]="i.kombiticket" ></td>
-        <td><input [ngModel]="i.personenAnzahl" ></td>
-        <td><input [ngModel]="i.restzahlung" ></td>
-        <td><input [ngModel]="i.ek" ></td>
-        <td><input [ngModel]="i.gewinn" ></td>
-        <td><input [ngModel]="i.mwst" ></td>
-        <td><input [ngModel]="i.nettoGewinn" ></td>
-      <td style=" cursor:pointer;text-align: center" (click)="delete(i)"> 
-        <mat-icon style="font-size: 36px" >delete</mat-icon></td>
-      <td style="cursor:pointer;text-align: center" (click)="bearbeite(i)" >
-        <mat-icon style="font-size: 36px">create</mat-icon></td>
+        <td><input [(ngModel)]="i.rechnungsnummer" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.kunde" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.anschriftKunde" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.anbieter" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.erstelltam" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.zahlungsziel" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.anzahlung" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.kombiticket" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.personenAnzahl" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.restzahlung" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.ek" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.gewinn" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.mwst" (ngModelChange)="bearbeite(i)"></td>
+        <td><input [(ngModel)]="i.nettoGewinn" (ngModelChange)="bearbeite(i)"></td>
+        <td>
+          <mat-form-field>
+            <mat-select [(ngModel)]="i.ticketArt" name="ticketArt" (ngModelChange)="bearbeite(i)">
+              <mat-option *ngFor="let statusOption of statusOptions" [value]="statusOption.value">
+                {{statusOption.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      <td style=" cursor:pointer;text-align: center" (click)="erledigt(i)"> 
+        <mat-checkbox [(ngModel)]="i.erledigt" (click)="erledigt(i)">
+          <label>Erledigt</label>
+        </mat-checkbox>
+      </td>
+
+    <td style="cursor:pointer;text-align: center" (click)="pdf(i)" >
+          <mat-icon style="font-size: 36px" (click)="pdf(i)">picture_as_pdf</mat-icon>
+        </td>
+       
     </tr>
   </table>
   <br>

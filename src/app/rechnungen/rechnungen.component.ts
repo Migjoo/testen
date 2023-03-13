@@ -14,11 +14,18 @@ export class RechnungenComponent implements OnInit {
 liste : Rechnung []=[];
 p=1;
 listeMitFilter: Rechnung[]=[];
+sql ="";
+statusOptions = [
+  {value: 'Reservierung', viewValue: 'Reservierung'},
+  {value: 'Gutschein', viewValue: 'Gutschein'},
+  {value: 'Angebot', viewValue: 'Angebot'}
+];
+
 
   constructor(public daten: DatenbankService) { 
 
   }
-sql: string="";
+
 
   ngOnInit(): void {
     this.daten.getListeRechnungen().then(() => {
@@ -41,8 +48,8 @@ nextPage(){
   filtern() {
     let test = this.filterVariable.nativeElement.value;
     let zwischenspeicher: Rechnung[] = [];
- for(let i of this.liste) {
-  if(i.ID.includes(test) || i.kunde.includes(test)) {
+  for(let i of this.liste) {
+    if(i.ID.includes(test) || i.kunde.includes(test)) {
      zwischenspeicher.push(i);
    }
   }
@@ -54,10 +61,21 @@ nextPage(){
     return Math.ceil(this.listeMitFilter.length / 10);
   }
   bearbeite(i: Rechnung){
-    this.sql;
     console.log(i);
+   this.daten.rechnungUpdate(i.ID, i);
   }
-  delete(i: Rechnung){
-    this.sql= ""+" DELETE FROM Rechnung WHERE ID = '"+ i.ID+ "';";
+  erledigt(i: Rechnung){
+  console.log(!i.erledigt);
+    this.daten.rechnungErledigt(i.ID, !i.erledigt);
+  }
+
+
+
+
+  pdf(i: Rechnung){
+    this.daten.rechnungPDF(i.ID).then((res)=>{
+      console.log(res);
+      window.open(res, '_blank');
+    });
   }
 }

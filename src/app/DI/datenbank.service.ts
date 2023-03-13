@@ -60,7 +60,55 @@ getListeKalkulation(): Promise<Kalkulation[]> {
   });
 }
 
+rechnungErledigt(id: string, erledigt: boolean): Promise<any>{
+ 
+  const url = `http://localhost:3000/rechnung/${id}`;
+  const body = { erledigt: erledigt };
+  return new Promise((resolve, reject) => {
+    this.http.put(url, body, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
+    .subscribe(response => {
+      resolve(response);
+    }, error => {
+      reject(error);
+    });
+  });
+}
+rechnungUpdate(id: string, erledigt: any): Promise<any>{
+ 
+  const url = `http://localhost:3000/rechnung/${id}`;
+  const body = erledigt ;
+  return new Promise((resolve, reject) => {
+    this.http.put(url, body, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
+    .subscribe(response => {
+      resolve(response);
+    }, error => {
+      reject(error);
+    });
+  });
+}
 
+
+
+
+rechnungPDF(id: string): Promise<any>{
+  const url = `http://localhost:3000/rechnung/${id}/pdf`;
+  return new Promise((resolve, reject) => {
+    this.http.get(url, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
+    .subscribe(response => {
+      console.log(response);
+      resolve(response);
+    }, error => {
+      reject(error);
+    });
+  });
+
+}
 
 
   getBuchungen(){

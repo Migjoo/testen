@@ -1,5 +1,6 @@
 import { Bucher } from "./bucher";
 import { Kombiticket } from "./kombiticket";
+import { Leistung } from "./leistung";
 
 
 
@@ -14,12 +15,16 @@ export class Rechnung {
         public zahlungsziel: Date = new Date(),
         public anzahlung: number = 0,
         public kombiticket: Kombiticket,
+        public leistungen: Leistung[]=[],
         public personenAnzahl: number = 0,
         public restzahlung: number = 0,
         public ek: number = 0,
         public gewinn: number = 0,
         public mwst: number = 19,
         public nettoGewinn: number = 0,
-        public ID: string = ""
+        public ID: string = "",
+        public rechnungsnummer: string= "",
+        public erledigt: boolean = false,
+        public ticketArt: string = "Reservierung",
     ) {}
 }

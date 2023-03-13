@@ -1,67 +1,70 @@
-table {
+.example-full-width {
   width: 100%;
- border: none;
-  zoom: 70%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  
-  
+  max-width: 500px;
+  margin: 20px;
+
+  input {
+    font-size: 16px;
+    color: #555;
+  }
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+.mat-form-field-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  font-size: 20px;
-  
-
+.mat-form-field-group .mat-form-field:nth-child(1),
+.mat-form-field-group .mat-form-field:nth-child(2) {
+  width: calc(50% - 20px);
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-  
+.mat-form-field-group .mat-form-field:nth-child(3),
+.mat-form-field-group .mat-form-field:nth-child(4) {
+  width: calc(50% - 20px);
 }
 
-.mat-form-field {
-  font-size: 14px;
+.mat-form-field-group .mat-form-field {
+  max-width: 500px;
+  margin: 20px;
+
+  input {
+    font-size: 16px;
+    color: #555;
+  }
+}
+
+.mat-form-field-group .example-full-width {
   width: 100%;
-  margin-bottom: 10px;
-  
-}
-input  {
-  font-size: 18px;
-  width: 100%;
-  height: 50px;
-  border:none
+  max-width: 500px;
+  margin: 20px;
+
+  input {
+    font-size: 16px;
+    color: #555;
+  }
 }
 
-input:focus{
-  color: rgb(160, 5, 5);
-}
+.mat-form-field-group button[type="submit"] {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 
-
-#meineId {
-  font-size: 15px;
-  color: rgb(0, 0, 0);
-  width: 100%;
-  height: 50px;
-  border-bottom: 2px solid rgb(105, 27, 27);
-  background-image: url('/assets/searchicon.svg');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding-left: 40px;
+  &:hover {
+    background-color: #0069d9;
+  }
 }
-#left{
-  float: right;
-  margin-left: 10px;
-}
-#right{
-  float: right;
-  margin-left: 10px;
-}
-
-
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  }

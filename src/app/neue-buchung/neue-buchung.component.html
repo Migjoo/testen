@@ -1,238 +1,244 @@
 <div class="sample-split">
   <igx-buttongroup>
   </igx-buttongroup>
-  <igx-buttongroup >
+  <igx-buttongroup>
   </igx-buttongroup>
 </div>
 
-<igx-stepper #stepper >
+<igx-stepper #stepper>
   <igx-step>
-      <span igxStepTitle>Kontaktdaten</span>
-      <div igxStepContent>
+    <span igxStepTitle>Kontaktdaten</span>
+    <div igxStepContent>
 
-        <mat-radio-group [(ngModel)]="istFirmenkunde">
-          <mat-radio-button value="true">Firmenkunde</mat-radio-button>
-          <mat-radio-button value="false">Privatkunde</mat-radio-button>
-        </mat-radio-group>
-        <br>
-        <mat-form-field>
-          <mat-label>Bearbeiter</mat-label>
-          <input matInput [(ngModel)]="bearbeiter" />
+      <mat-radio-group [(ngModel)]="istFirmenkunde">
+        <mat-radio-button value="true">Firmenkunde</mat-radio-button>
+        <mat-radio-button value="false">Privatkunde</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <mat-form-field>
+        <mat-label>Bearbeiter</mat-label>
+        <input matInput [(ngModel)]="bearbeiter" />
+      </mat-form-field>
+      <br>
+
+      <br>
+
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1">Herr</mat-radio-button>
+        <mat-radio-button value="2">Frau</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <br>
+      <div class="sample-step-actions">
+        <mat-form-field appearance="fill">
+
+          <mat-label>Vorname</mat-label>
+          <input #vorname matInput placeholder="Vorname" required>
         </mat-form-field>
-<br>
-
-<br>
-  <p *ngIf="istFirmenkunde">Bei Firmenkunden beim Nachnamen den Firmennamen angeben, Vorname und Geschlecht freilassen!</p>
-
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Herr</mat-radio-button>
-            <mat-radio-button value="2">Frau</mat-radio-button>
-        </mat-radio-group>
+        <mat-form-field appearance="fill" id="name">
+          <mat-label>Nachname</mat-label>
+          <input #nachname matInput placeholder="Nachname" required>
+        </mat-form-field>
         <br>
+        <mat-form-field appearance="fill" style="width: 25%;">
+          <mat-label>Straße</mat-label>
+          <input #straße matInput placeholder="Straße" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 6%;">
+          <mat-label>Nr.</mat-label>
+          <input #nummer matInput placeholder="Nr." required>
+        </mat-form-field>
         <br>
-          <div class="sample-step-actions">   
-             <mat-form-field appearance="fill">
-      
-                <mat-label>Vorname</mat-label>
-                <input #vorname matInput placeholder="Vorname"  required>
-              </mat-form-field>
-              <mat-form-field appearance="fill" id="name">
-                <mat-label >Nachname</mat-label>
-                <input  #nachname matInput placeholder="Nachname"  required>
-              </mat-form-field> 
-              <br>
-              <mat-form-field appearance="fill" style= "width: 25%;">
-                <mat-label>Straße</mat-label>
-                <input #straße matInput placeholder="Straße"  required>
-              </mat-form-field> 
-              <mat-form-field appearance="fill" style= "width: 6%;">
-                <mat-label>Nr.</mat-label>
-                <input #nummer matInput placeholder="Nr."  required>
-              </mat-form-field> 
-              <br>
-              <mat-form-field appearance="fill">
-                <mat-label>Postleitzahl</mat-label>
-                <input #plz matInput placeholder="Postleitzahl"  required>
-              </mat-form-field> 
-              <mat-form-field appearance="fill">
-                <mat-label>Ort</mat-label>
-                <input #ort matInput placeholder="Ort"  required>
-              </mat-form-field> 
-              <br>
-              <mat-form-field appearance="fill" style= "width: 25%;">
-                <mat-label>E-mail</mat-label>
-                <input #mail matInput placeholder="E-mail"  required >
-              </mat-form-field> 
-              <br>
-              <mat-form-field appearance="fill">
-                <mat-label>Telefon</mat-label>
-                <input #tel matInput placeholder="Telefon"  required>
-              </mat-form-field> 
-              <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Postleitzahl</mat-label>
+          <input #plz matInput placeholder="Postleitzahl" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Ort</mat-label>
+          <input #ort matInput placeholder="Ort" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" style="width: 25%;">
+          <mat-label>E-mail</mat-label>
+          <input #mail matInput placeholder="E-mail" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Telefon</mat-label>
+          <input #tel matInput placeholder="Telefon" required>
+        </mat-form-field>
+        <br>
 
-              <button igxButton="raised" (click)="stepper.next()" class="weiter">WEITER</button>
-          </div>
+        <button igxButton="raised" (click)="stepper.next()" class="weiter">WEITER</button>
       </div>
+    </div>
   </igx-step>
 
 
 
 
   <igx-step>
-      <span igxStepTitle>Ticketauswahl</span>
-      <div igxStepContent>
-          <div class="sample-step-actions">  
-            <br>
-            <mat-form-field appearance="fill" style= "width: 500px;">
-              <mat-label>Kombiticket</mat-label>
-              <mat-select [(ngModel)]="auswahlKombiticket">
-                <mat-option *ngFor="let food of kombitickets" [value]="food.id">
-                  {{food.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <br>
-           
-         
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Datum</mat-label>
-                <input #datum matInput type="date">
-              </mat-form-field>
-              <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Uhrzeit</mat-label>
-                <input #uhr matInput type="time">
-              </mat-form-field>
-              <br>
+    <span igxStepTitle>Ticketauswahl</span>
+    <div igxStepContent>
+      <div class="sample-step-actions">
+        <br>
+        <mat-form-field appearance="fill" style="width: 500px;">
+          <mat-label>Kombiticket</mat-label>
+          <mat-select [(ngModel)]="auswahlKombiticket">
+            <mat-option *ngFor="let food of kombitickets" [value]="food.id">
+              {{food.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
 
-            <mat-form-field appearance="fill">
-            <mat-label>Ticketart</mat-label>
-            <mat-select #ticket [(ngModel)]="auswahlTicket">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                     {{food.viewValue}}
-                 </mat-option>
-            </mat-select>
-            </mat-form-field>
 
-            <mat-form-field appearance="fill">
-              <mat-label>Bucher</mat-label>
-              <mat-select #ticket [(ngModel)]="auswahlBucher">
-                  <mat-option *ngFor="let food of bucher" [value]="food.name">
-                       {{food.name}}
-                   </mat-option>
-              </mat-select>
-              </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill" style="width: 10%;">
-                <mat-label>Personenanzahl</mat-label>
-                <input #anzahl matInput type="number" minlength="1" maxlength="32">
-              </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Datum</mat-label>
+          <input #datum matInput type="date">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Uhrzeit</mat-label>
+          <input #uhr matInput type="time">
+        </mat-form-field>
+        <br>
 
-            <br>
-            <mat-form-field appearance="fill">
-                <mat-label>Zahlungsart</mat-label>
-                <mat-select #select [(ngModel)]="auswahlZahlungsart">
-                    <mat-option *ngFor="let zahlung of zahlungen" [value]="zahlung.value">
-                         {{zahlung.viewValue}}
-                     </mat-option>
-                </mat-select>
-                </mat-form-field>
-                <br>
-                <mat-accordion>
-                  <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        Zusätzliche Leistungen
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div *ngFor="let leistung of listeLeistungen">
-                      <mat-checkbox [(ngModel)]="leistungSelected[leistung.ID]">{{ leistung.Leistung }}</mat-checkbox>
-                    </div>
-                  </mat-expansion-panel>
-                </mat-accordion>
-          
-              <button igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
-              <button igxButton="raised" (click)="stepper.next(); uebersicht()" class="weiter">WEITER</button>
-          </div>
-         
+        <mat-form-field appearance="fill">
+          <mat-label>Ticketart</mat-label>
+          <mat-select #ticket [(ngModel)]="auswahlTicket">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Bucher</mat-label>
+          <mat-select #ticket [(ngModel)]="auswahlBucher">
+            <mat-option *ngFor="let food of bucher" [value]="food.name">
+              {{food.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 10%;">
+          <mat-label>Personenanzahl</mat-label>
+          <input #anzahl matInput type="number" minlength="1" maxlength="32">
+        </mat-form-field>
+
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Zahlungsart</mat-label>
+          <mat-select #select [(ngModel)]="auswahlZahlungsart">
+            <mat-option *ngFor="let zahlung of zahlungen" [value]="zahlung.value">
+              {{zahlung.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Zusätzliche Leistungen
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let leistung of listeLeistungen">
+              <mat-checkbox [(ngModel)]="leistungSelected[leistung.ID]">{{ leistung.Leistung }}:
+                {{leistung.Leistungsinhalt}}
+                Hinfahrt: {{leistung.Uhrzeit_1_Hin}} Rückfahrt:{{leistung.Uhrzeit_1_Rueck}}
+              </mat-checkbox>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <button igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
+        <button igxButton="raised" (click)="stepper.next(); uebersicht()" class="weiter">WEITER</button>
       </div>
-    
+
+    </div>
+
   </igx-step>
   <igx-step>
     <span igxStepTitle>Übersicht</span>
     <div igxStepContent>
-        <div class="sample-step-actions">
-          
-          <table  style="width: 100px;">
-            <tr>
-              <td ><b>Vorname:</b> </td>
-              <td #vn > </td>
-            </tr>
-            <tr >
-              <td ><b>Nachname: </b></td>
-              <td #nn> </td>
-            </tr>
-            <tr>
-            <td ><b>Straße und Hausnummer:</b> </td>
+      <div class="sample-step-actions">
+
+        <table style="width: 100px;">
+          <tr>
+            <td><b>Vorname:</b> </td>
+            <td #vn> </td>
+          </tr>
+          <tr>
+            <td><b>Nachname: </b></td>
+            <td #nn> </td>
+          </tr>
+          <tr>
+            <td><b>Straße und Hausnummer:</b> </td>
             <td #stn> </td>
           </tr>
-          <tr >
-            <td ><b>PLZ und Wohnort:</b> </td>
+          <tr>
+            <td><b>PLZ und Wohnort:</b> </td>
             <td #add> </td>
           </tr>
           <tr>
-            <td ><b>Telefonnummer:</b> </td>
+            <td><b>Telefonnummer:</b> </td>
             <td #te> </td>
           </tr>
-          <tr >
-            <td ><b>Email:</b> </td>
+          <tr>
+            <td><b>Email:</b> </td>
             <td #em> </td>
           </tr>
           <tr>
-            <td ><b>Datum und Uhrzeit:</b> </td>
+            <td><b>Datum und Uhrzeit:</b> </td>
             <td #da> </td>
           </tr>
-          <tr >
-            <td ><b>Ticketart:</b> </td>
-            <td > {{auswahlTicket}}</td>
+          <tr>
+            <td><b>Ticketart:</b> </td>
+            <td> {{auswahlTicket}}</td>
           </tr>
           <tr>
-          <td ><b>Personenanzahl: </b></td>
-          <td #peanzahl> </td>
-        </tr>
-        <tr >
-          <td ><b>Zahlungsart:</b> </td>
-          <td > {{auswahlZahlungsart}}</td>
-        </tr>
-        <tr *ngFor="let peter of leistungenName">
-          <td>Zusätzliche Leistungen</td>
-          <td>{{ peter }}</td>
-        </tr>
-          </table>
+            <td><b>Personenanzahl: </b></td>
+            <td #peanzahl> </td>
+          </tr>
+          <tr>
+            <td><b>Zahlungsart:</b> </td>
+            <td> {{auswahlZahlungsart}}</td>
+          </tr>
+          <tr *ngFor="let peter of leistungenName">
+            <td>Zusätzliche Leistungen</td>
+            <td>{{ peter }}</td>
+          </tr>
+        </table>
 
         <div *ngIf="sender">
-            <h5> PDFs wurden generiert, bitte prüfen und ggf. abschicken!</h5>
-            <p *ngIf="gesendet">Email gesendet</p>
-            <h4>Mail an Leistungsträger</h4>
-            <table>
-            <tr *ngFor="let i of auswahlLeistungen"><td>{{i.Leistung}}</td>
-            <td><button igxButton="raised" (click)="mailLeistung(i.ID)">Sende Mail</button></td>
-          </tr>
-            </table>
-              <h4>Mail an Kunden</h4>
-              <table>
-                <tr><td>Kunde</td>
-                <td><button igxButton="raised" (click)="emailSenden()" >Email-Senden</button></td>
-                </tr>
-              </table>
-           
-          </div>
-          <br>
-
-
-            <button  igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
-            <button igxButton="raised" (click)="offen()" class="weiter">BESTÄTIGEN</button>
+          <h5> PDFs wurden generiert, bitte prüfen und ggf. abschicken!</h5>
+          <p *ngIf="gesendet">Email gesendet</p>
+          <h4>Mail an Leistungsträger</h4>
+          <table>
+            <tr *ngFor="let i of auswahlLeistungen">
+              <td>{{i.Leistung}}</td>
+              <td><button igxButton="raised" (click)="mailLeistung(i.ID)">Siehe PDF</button></td>
+              <td><button igxButton="raised" (click)="mailLeistung(i.ID)">Sende Mail</button></td>
+            </tr>
+          </table>
+          <h4>Mail an Kunden</h4>
+          <table>
+            <tr>
+              <td>Kunde</td>
+              <td><button igxButton="raised" (click)="pdf()">Siehe Rechnung</button></td>
+              <td><button igxButton="raised" (click)="sendeMailAnKunde()">Email-Senden</button></td>
+            </tr>
+          </table>
 
         </div>
+        <br>
+
+
+        <button igxButton="raised" (click)="stepper.prev()" class="zurueck">ZURÜCK</button>
+        <button igxButton="raised" (click)="erstelleBuchung()" class="weiter">BESTÄTIGEN</button>
+        <button *ngIf="rechnung" (click)="pdf()">Öffne Rechnung</button>
+      </div>
     </div>
-</igx-step>
+  </igx-step>
 
 </igx-stepper>

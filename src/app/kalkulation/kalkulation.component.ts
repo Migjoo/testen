@@ -15,7 +15,7 @@ export class KalkulationComponent implements OnInit {
     ngOnInit(): void {
       this.daten.getListeKalkulation().then(() => {
         this.listeKalkulation = this.daten.listeKalkulation;
-        console.log(this.listeKalkulation);
+    
       });
   }
   nextPage(){

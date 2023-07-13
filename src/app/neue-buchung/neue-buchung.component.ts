@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit , OnInit} from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { IButtonGroupEventArgs } from 'igniteui-angular';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { DatenbankService } from '../DI/datenbank.service';
 import { Kombiticket } from '../Domain/kombiticket';
 import { Bucher } from '../Domain/bucher';
 import { Leistung } from '../Domain/leistung';
+import { Rechnung } from '../Domain/rechnung';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface kombi {
@@ -20,7 +21,7 @@ interface Zahlung {
   value: string;
   viewValue: string;
 }
-interface buc{
+interface buc {
   id: string;
   name: string;
 }
@@ -29,12 +30,13 @@ interface buc{
   templateUrl: './neue-buchung.component.html',
   styleUrls: ['./neue-buchung.component.scss'],
 })
-export class NeueBuchungComponent   implements OnInit{
-  istFirmenkunde= false;
+export class NeueBuchungComponent implements OnInit {
+  rechnung?: Rechnung;
+  istFirmenkunde = false;
   leistungSelected: { [id: string]: boolean } = {};
-  auswahlBucher="";
+  auswahlBucher = "";
   bearbeiter: string = '';
-  sender:boolean=false;
+  sender: boolean = false;
   @ViewChild('nachname') nachname!: ElementRef;
   @ViewChild('vorname') vorname!: ElementRef;
   @ViewChild('nn') nn!: ElementRef;
@@ -57,39 +59,39 @@ export class NeueBuchungComponent   implements OnInit{
   @ViewChild('peanzahl') peanzahl!: ElementRef;
   @ViewChild('auswahlT') auswahlT!: ElementRef;
 
-  constructor(private http: HttpClient, public daten: DatenbankService, private snackBar: MatSnackBar) {}
-  
-  
+  constructor(private http: HttpClient, public daten: DatenbankService, private snackBar: MatSnackBar) { }
+
+
   ngOnInit(): void {
     this.daten.getListeKombiticket().then(() => {
       this.listeKombiticket = this.daten.listeKombitickets;
-      for(let i of this.listeKombiticket){
-        this.kombitickets.push({id: i.ID, name: i.Kombiticket});
+      for (let i of this.listeKombiticket) {
+        this.kombitickets.push({ id: i.ID, name: i.Kombiticket });
       }
-      });
-      this.daten.getListeBucher().then(() => {
-        this.listeBucher = this.daten.listeBucher;
-        for(let i of this.listeBucher){
-          this.bucher.push({id: i.ID, name: i.Bucher});
-        }
-      });
-      this.daten.getListeLeistungen().then(() => {
-        this.listeLeistungen = this.daten.listeLeistungen;
-      });
- 
+    });
+    this.daten.getListeBucher().then(() => {
+      this.listeBucher = this.daten.listeBucher;
+      for (let i of this.listeBucher) {
+        this.bucher.push({ id: i.ID, name: i.Bucher });
+      }
+    });
+    this.daten.getListeLeistungen().then(() => {
+      this.listeLeistungen = this.daten.listeLeistungen;
+    });
+
   }
 
-  public kombitickets: kombi[]= [];
-  public bucher : buc[]=[];
-  public listeBucher: Bucher[]=[];
+  public kombitickets: kombi[] = [];
+  public bucher: buc[] = [];
+  public listeBucher: Bucher[] = [];
 
 
-  auswahlZahlungsart:string ="";
+  auswahlZahlungsart: string = "";
   public auswahl: string = '';
-  public listeKombiticket: Kombiticket[]=[];
-  public auswahlKombiticket: string= "";
-public listeLeistungen: Leistung[]=[];
-auswahlTicket="";
+  public listeKombiticket: Kombiticket[] = [];
+  public auswahlKombiticket: string = "";
+  public listeLeistungen: Leistung[] = [];
+  auswahlTicket = "";
   foods: Food[] = [
     { value: 'Reservierung', viewValue: 'Reservierung' },
     { value: 'Gutschein', viewValue: 'Gutschein' },
@@ -140,15 +142,15 @@ auswahlTicket="";
 
 
   uebersicht(): void {
-  
- this.ausgewaehlteLeistungen = this.listeLeistungen
-  .map(leistung => this.leistungSelected[leistung.ID] ? leistung.ID.toString() : null)
-  .filter(id => id !== null);
+
+    this.ausgewaehlteLeistungen = this.listeLeistungen
+      .map(leistung => this.leistungSelected[leistung.ID] ? leistung.ID.toString() : null)
+      .filter(id => id !== null);
     console.log(this.ausgewaehlteLeistungen);
-this.leistungenName = this.listeLeistungen
-.filter(leistung => this.leistungSelected[leistung.ID])
-.map(leistung => leistung.Leistung);
-console.log(this.leistungenName);
+    this.leistungenName = this.listeLeistungen
+      .filter(leistung => this.leistungSelected[leistung.ID])
+      .map(leistung => leistung.Leistung);
+    console.log(this.leistungenName);
 
     this.vn.nativeElement.innerHTML = this.vorname.nativeElement.value;
     this.nn.nativeElement.innerHTML = this.nachname.nativeElement.value;
@@ -162,24 +164,24 @@ console.log(this.leistungenName);
 
 
 
-  gesendet=false;
-laedt: boolean= false;
-  emailSenden(): void {
+  gesendet = false;
+  laedt: boolean = false;
+  async erstelleBuchung() {
     this.snackBar.open("Email wird gesendet", "Cancel", {
       duration: 100000,
     });
-    this.laedt=true;
-    let email= this.em.nativeElement.innerHTML;
-    let vorname= this.vn.nativeElement.innerHTML;
-    let nachname= this.nn.nativeElement.innerHTML;
+    this.laedt = true;
+    let email = this.em.nativeElement.innerHTML;
+    let vorname = this.vn.nativeElement.innerHTML;
+    let nachname = this.nn.nativeElement.innerHTML;
     let strasse = this.straße.nativeElement.value;
-    let datum= this.da.nativeElement.innerHTML;
-    let tel= this.te.nativeElement.innerHTML;  
-    let nummer= this.nummer.nativeElement.value;
-    let plz= this.plz.nativeElement.value;
-    let ort= this.ort.nativeElement.value;
-    let anzahl= this.peanzahl.nativeElement.innerHTML;
-   
+    let datum = this.da.nativeElement.innerHTML;
+    let tel = this.te.nativeElement.innerHTML;
+    let nummer = this.nummer.nativeElement.value;
+    let plz = this.plz.nativeElement.value;
+    let ort = this.ort.nativeElement.value;
+    let anzahl = this.peanzahl.nativeElement.innerHTML;
+
     const data = {
       "vorname": vorname,
       "nachname": nachname,
@@ -190,11 +192,11 @@ laedt: boolean= false;
       "telefon": tel,
       "email": email,
       "ticket": {
-          "kombiticketID": this.auswahlKombiticket,
-          "datum": datum,
-          "personsNumber": anzahl,
-          "ticketArt": this.auswahlTicket,
-          "zahlungsart": this.auswahlZahlungsart
+        "kombiticketID": this.auswahlKombiticket,
+        "datum": datum,
+        "personsNumber": anzahl,
+        "ticketArt": this.auswahlTicket,
+        "zahlungsart": this.auswahlZahlungsart
       },
       "anbieter": this.auswahlBucher,
       "bearbeiter": this.bearbeiter,
@@ -202,36 +204,53 @@ laedt: boolean= false;
       "anzahlung": "false",
       "leistungen": this.ausgewaehlteLeistungen,
 
-       
-  };
-   this.daten.sendeMail(data);
-   this.laedt = false;
-   this.gesendet= true;
+
+    };
+    this.daten.erstelleBuchung(data).subscribe((res) => {
+      const rechnung: Rechnung = res;
+      this.rechnung = rechnung
+    });
+
+    this.sender = true;
+    this.laedt = false;
+    this.gesendet = true;
   }
 
- auswahlLeistungen: Leistung[]=[]; 
-offen(){
-  this.sender= true;
-  for(let i of this.listeKombiticket){
+  auswahlLeistungen: Leistung[] = [];
+  offen() {
+    this.sender = true;
+    for (let i of this.listeKombiticket) {
 
-    if(i.ID == this.auswahlKombiticket){
-      console.log(this.listeLeistungen [1]+ " "+ i.Leistung1);
-      for(let j of this.listeLeistungen){
-        if(j.ID==i.Leistung1||j.ID==i.Leistung2||j.ID==i.Leistung3||j.ID==i.Leistung4||j.ID==i.Leistung5||
-          j.ID==i.Leistung7){
-          this.auswahlLeistungen.push(j);
+      if (i.ID == this.auswahlKombiticket) {
+        console.log(this.listeLeistungen[1] + " " + i.Leistung1);
+        for (let j of this.listeLeistungen) {
+          if (j.ID == i.Leistung1 || j.ID == i.Leistung2 || j.ID == i.Leistung3 || j.ID == i.Leistung4 || j.ID == i.Leistung5 ||
+            j.ID == i.Leistung7) {
+            this.auswahlLeistungen.push(j);
+          }
         }
       }
     }
+    console.log(this.auswahlLeistungen);
+
   }
-  console.log(this.auswahlLeistungen);
-
-}
-  mailLeistung(id: string){
-  console.log(id);
+  mailLeistung(id: string) {
+    console.log(id);
   }
 
-
+  pdf(){
+    const id = this.rechnung!.ID;
+    this.daten.rechnungPDF(id).then((res)=>{
+    console.log("Objekt:" +res);
+    /* const file = new Blob([res], { type: 'application/pdf' });
+    const fileURL = `http://localhost:3000/rechnung/${id}/pdf`; */
+    window.open(`http://localhost:3000/rechnung/${id}/pdf`, '_blank');
+    });
+    }
+    sendeMailAnKunde(){
+      console.log('email senden mit ' + this.rechnung!.ID);
+      this.daten.eMailKunde(this.rechnung!.ID);
+    }
 
   title = 'gustavo';
 }

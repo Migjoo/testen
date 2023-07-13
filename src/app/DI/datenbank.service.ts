@@ -6,16 +6,17 @@ import { Kombiticket } from '../Domain/kombiticket';
 import { Leistung } from '../Domain/leistung';
 import { Bucher } from '../Domain/bucher';
 import { Kalkulation } from '../Domain/kalkulation';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatenbankService {
-  listeKombitickets: Kombiticket[]=[];
-  listeLeistungen: Leistung[]=[];
-  listeBucher: Bucher[]=[];
-  listeRechnungen: Rechnung[]=[];
-  listeKalkulation: Kalkulation[]=[];
+  listeKombitickets: Kombiticket[] = [];
+  listeLeistungen: Leistung[] = [];
+  listeBucher: Bucher[] = [];
+  listeRechnungen: Rechnung[] = [];
+  listeKalkulation: Kalkulation[] = [];
   listeBuchungen: Buchungen[] = [
     new Buchungen(),
     new Buchungen(),
@@ -27,96 +28,97 @@ export class DatenbankService {
 
   constructor(public http: HttpClient) { }
 
-getListeRechnungen(): Promise<Rechnung[]> {
-  console.log("start");
-  return new Promise((resolve, reject) => {
-    this.http.get<Rechnung[]>('http://localhost:3000/Rechnung', {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    })
-    .subscribe(response => {
-      console.log("Rechnung");
-      console.log(response);
-      this.listeRechnungen=response;
-      console.log(this.listeRechnungen);
-    resolve(this.listeRechnungen);
-    }, error => {
-      reject("Klappt nicht -> KombiticketListe");
+  getListeRechnungen(): Promise<Rechnung[]> {
+    console.log("start");
+    return new Promise((resolve, reject) => {
+      this.http.get<Rechnung[]>('http://localhost:3000/Rechnung', {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      })
+        .subscribe(response => {
+          console.log("Rechnung");
+          console.log(response);
+          this.listeRechnungen = response;
+          console.log(this.listeRechnungen);
+          resolve(this.listeRechnungen);
+        }, error => {
+          reject("Klappt nicht -> KombiticketListe");
+        });
     });
-  });
-}
+  }
 
-getListeKalkulation(): Promise<Kalkulation[]> {
-  console.log("start");
-  return new Promise((resolve, reject) => {
-    this.http.get<Kalkulation[]>('http://localhost:3000/Kalkulation', {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    })
-    .subscribe(response => {
-      this.listeKalkulation=response;
-       resolve(this.listeKalkulation);
-    }, error => {
-      reject("Klappt nicht -> KombiticketListe");
+  getListeKalkulation(): Promise<Kalkulation[]> {
+    console.log("start");
+    return new Promise((resolve, reject) => {
+      this.http.get<Kalkulation[]>('http://localhost:3000/Kalkulation', {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      })
+        .subscribe(response => {
+          this.listeKalkulation = response;
+          resolve(this.listeKalkulation);
+        }, error => {
+          reject("Klappt nicht -> KombiticketListe");
+        });
     });
-  });
-}
+  }
 
-rechnungErledigt(id: string, erledigt: boolean): Promise<any>{
- 
-  const url = `http://localhost:3000/rechnung/${id}`;
-  const body = { erledigt: erledigt };
-  return new Promise((resolve, reject) => {
-    this.http.put(url, body, {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    })
-    .subscribe(response => {
-      resolve(response);
-    }, error => {
-      reject(error);
+  rechnungErledigt(id: string, erledigt: boolean): Promise<any> {
+
+    const url = `http://localhost:3000/rechnung/${id}`;
+    const body = { erledigt: erledigt };
+    return new Promise((resolve, reject) => {
+      this.http.put(url, body, {
+        headers: { 'Access-Control-Allow-Origin': '*' }
+      })
+        .subscribe(response => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
     });
-  });
-}
-rechnungUpdate(id: string, erledigt: any): Promise<any>{
- 
-  const url = `http://localhost:3000/rechnung/${id}`;
-  const body = erledigt ;
-  return new Promise((resolve, reject) => {
-    this.http.put(url, body, {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    })
-    .subscribe(response => {
-      resolve(response);
-    }, error => {
-      reject(error);
+  }
+  rechnungUpdate(id: string, erledigt: any): Promise<any> {
+
+    const url = `http://localhost:3000/rechnung/${id}`;
+    const body = erledigt;
+    return new Promise((resolve, reject) => {
+      this.http.put(url, body, {
+        headers: { 'Access-Control-Allow-Origin': '*' }
+      })
+        .subscribe(response => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
     });
-  });
-}
+  }
 
 
 
 
-rechnungPDF(id: string): Promise<any>{
-  const url = `http://localhost:3000/rechnung/${id}/pdf`;
-  return new Promise((resolve, reject) => {
-    this.http.get(url, {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    })
-    .subscribe(response => {
-      console.log(response);
-      resolve(response);
-    }, error => {
-      reject(error);
+  rechnungPDF(id: string): Promise<any> {
+    const url = `http://localhost:3000/rechnung/${id}/pdf`;
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        responseType: 'blob',
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      })
+        .subscribe(response => {
+          console.log(response);
+          resolve(response);
+        }, error => {
+          reject(error);
+        });
     });
-  });
-
-}
+  }
 
 
-  getBuchungen(){
+
+  getBuchungen() {
     return this.listeBuchungen;
   }
-  setListeBuchungen(liste: Buchungen[]){
-    this.listeBuchungen= [new Buchungen()];
-  this.listeBuchungen = liste;
+  setListeBuchungen(liste: Buchungen[]) {
+    this.listeBuchungen = [new Buchungen()];
+    this.listeBuchungen = liste;
   }
 
 
@@ -125,14 +127,14 @@ rechnungPDF(id: string): Promise<any>{
       this.http.get<Kombiticket[]>('http://localhost:3000/kombiticket', {
         headers: { 'Access-Control-Allow-Origin': '*' },
       })
-      .subscribe(response => {
-        console.log("!das");
-        console.log(response);
-        this.listeKombitickets = response;
-        resolve(this.listeKombitickets);
-      }, error => {
-        reject("Klappt nicht -> KombiticketListe");
-      });
+        .subscribe(response => {
+          console.log("!das");
+          console.log(response);
+          this.listeKombitickets = response;
+          resolve(this.listeKombitickets);
+        }, error => {
+          reject("Klappt nicht -> KombiticketListe");
+        });
     });
   }
 
@@ -141,38 +143,48 @@ rechnungPDF(id: string): Promise<any>{
       this.http.get<Bucher[]>('http://localhost:3000/bucher', {
         headers: { 'Access-Control-Allow-Origin': '*' },
       })
-      .subscribe(response => {
-        this.listeBucher = response;
-        resolve(this.listeBucher);
-      }, error => {
-        reject("Klappt nicht -> BucherListe");
-      });
+        .subscribe(response => {
+          this.listeBucher = response;
+          resolve(this.listeBucher);
+        }, error => {
+          reject("Klappt nicht -> BucherListe");
+        });
     });
   }
-  getListeLeistungen(){
+  getListeLeistungen() {
     return new Promise((resolve, reject) => {
       this.http.get<Leistung[]>('http://localhost:3000/leistung', {
-      headers: { 'Access-Control-Allow-Origin': '*' },
+        headers: { 'Access-Control-Allow-Origin': '*' },
       })
-      .subscribe(response => {
-     this.listeLeistungen = response;
-     resolve(this.listeLeistungen);
-      }, error => {
-      reject("Klappt nicht -> LeistungenListe");
-      });
-      });
-  }
-  
-  sendeMail(data:any){
-    this.http
-    .post('http://localhost:3000/buchung', data, {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    })
-    .subscribe((response) => {
-      console.log(response);
+        .subscribe(response => {
+          this.listeLeistungen = response;
+          resolve(this.listeLeistungen);
+        }, error => {
+          reject("Klappt nicht -> LeistungenListe");
+        });
     });
+  }
+
+  erstelleBuchung(data: any): Observable<any> {
+    return this.http
+      .post('http://localhost:3000/buchung', data, {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      })
+
 
   }
-  
 
+  eMailKunde(id: string) {
+      return new Promise((resolve, reject) => {
+        this.http.get<Bucher[]>(`http://localhost:3000/mail/kunde/rechnung/${id}`, {
+          headers: { 'Access-Control-Allow-Origin': '*' },
+        })
+          .subscribe(response => {
+            this.listeBucher = response;
+            resolve(this.listeBucher);
+          }, error => {
+            reject("Klappt nicht -> BucherListe");
+          });
+      });
+  }
 }

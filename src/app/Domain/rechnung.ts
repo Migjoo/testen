@@ -11,11 +11,11 @@ export class Rechnung {
         public kunde: string = "",
         public anschriftKunde: string = "",
         public anbieter: Bucher,
-        public erstelltam: Date = new Date(),
+        public erstelltAm: Date = new Date(),
         public zahlungsziel: Date = new Date(),
         public anzahlung: number = 0,
         public kombiticket: Kombiticket,
-        public leistungen: Leistung[]=[],
+        public leistungen: Leistung[] = [],
         public personenAnzahl: number = 0,
         public restzahlung: number = 0,
         public ek: number = 0,
@@ -23,8 +23,8 @@ export class Rechnung {
         public mwst: number = 19,
         public nettoGewinn: number = 0,
         public ID: string = "",
-        public rechnungsnummer: string= "",
+        public rechnungsnummer: string = "",
         public erledigt: boolean = false,
         public ticketArt: string = "Reservierung",
-    ) {}
+    ) { }
 }

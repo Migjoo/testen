@@ -32,13 +32,8 @@ statusOptions = [
       this.liste = this.daten.listeRechnungen;
       this.listeMitFilter= this.liste;
     });
-  console.log(this.liste + "huist"+ this.listeMitFilter);
-  
   }
-setRechnungen(){
- // this.liste.push(new Rechnung());
-//  this.daten.setListeRechnungen(this.liste);
-}
+
 nextPage(){
   this.p++;
   }
@@ -60,6 +55,7 @@ nextPage(){
   get pageCount() {
     return Math.ceil(this.listeMitFilter.length / 10);
   }
+
   bearbeite(i: Rechnung){
     console.log(i);
    this.daten.rechnungUpdate(i.ID, i);
@@ -71,11 +67,12 @@ nextPage(){
 
 
 
-
   pdf(i: Rechnung){
     this.daten.rechnungPDF(i.ID).then((res)=>{
-      console.log(res);
-      window.open(res, '_blank');
+    console.log("Objekt:" +res);
+    const file = new Blob([res], { type: 'application/pdf' });
+    const fileURL = `http://localhost:3000/static/${i.rechnungsnummer}.pdf`;
+    window.open(fileURL, '_blank');
     });
-  }
+    }
 }

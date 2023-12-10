@@ -1,13 +1,26 @@
-<div>
-    <h2>Login</h2>
-    <form #loginForm="ngForm" (submit)="login($event)">
-      <label for="username">Benutzername:</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required>
+<div class="test">
+  <div class="container">
+    <h4>Willkommen beim Buchungshelfer</h4>
+    <br>
+    <h6>Bitte melden Sie sich an</h6>
+    <div>
       <br>
-      <label for="password">Passwort:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-      <br>
-      <button type="submit">Anmelden</button>
-    </form>
+      <form #loginForm="ngForm" (submit)="login($event)">
+        <mat-form-field>
+          <label for="username">Benutzername</label>
+          <input matInput type="text" id="username" [(ngModel)]="username" name="username" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <label for="password">Passwort</label>
+          <input matInput type="password" id="password" [(ngModel)]="password" name="password" required>
+        </mat-form-field>
+        <br>
+        <br>
+        
+        <button class="login" type="submit" mat-raised-button>Anmelden</button>
+      </form>
+    </div>
   </div>
+</div>
   

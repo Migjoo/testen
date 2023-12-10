@@ -1,0 +1,46 @@
+/* login.component.scss */
+
+.test {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  h4 {
+    color: #333;
+  }
+  
+  h6 {
+    color: #666;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  button.login {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  

@@ -210,7 +210,7 @@ export class NeueBuchungComponent implements OnInit {
       const rechnung: Rechnung = res;
       this.rechnung = rechnung
     });
-
+this.offen();
     this.sender = true;
     this.laedt = false;
     this.gesendet = true;
@@ -231,7 +231,7 @@ export class NeueBuchungComponent implements OnInit {
         }
       }
     }
-    console.log(this.auswahlLeistungen);
+    
 
   }
   mailLeistung(id: string) {
@@ -250,6 +250,16 @@ export class NeueBuchungComponent implements OnInit {
     sendeMailAnKunde(){
       console.log('email senden mit ' + this.rechnung!.ID);
       this.daten.eMailKunde(this.rechnung!.ID);
+    }
+    sendeMailLeistungstraeger(leistungsId: string){
+      this.daten.emailLeistungstraeger(this.rechnung!.ID, leistungsId);
+    }
+
+    sieheGutschein(leistungsId: string){
+      //'ltt/:leistungsId/rechnung/:rechnungId'
+      const idRg = this.rechnung!.ID;
+    
+      window.open(`http://localhost:3000/rechnung/${idRg}/voucher/${leistungsId}`, '_blank');
     }
 
   title = 'gustavo';

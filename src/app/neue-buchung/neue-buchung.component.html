@@ -217,8 +217,8 @@
           <table>
             <tr *ngFor="let i of auswahlLeistungen">
               <td>{{i.Leistung}}</td>
-              <td><button igxButton="raised" (click)="mailLeistung(i.ID)">Siehe PDF</button></td>
-              <td><button igxButton="raised" (click)="mailLeistung(i.ID)">Sende Mail</button></td>
+              <td><button igxButton="raised" (click)="sieheGutschein(i.ID)">Siehe PDF</button></td>
+              <td><button igxButton="raised" (click)="sendeMailLeistungstraeger(i.ID)">Sende Mail</button></td>
             </tr>
           </table>
           <h4>Mail an Kunden</h4>

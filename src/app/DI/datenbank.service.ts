@@ -175,16 +175,14 @@ export class DatenbankService {
   }
 
   eMailKunde(id: string) {
-      return new Promise((resolve, reject) => {
-        this.http.get<Bucher[]>(`http://localhost:3000/mail/kunde/rechnung/${id}`, {
-          headers: { 'Access-Control-Allow-Origin': '*' },
-        })
-          .subscribe(response => {
-            this.listeBucher = response;
-            resolve(this.listeBucher);
-          }, error => {
-            reject("Klappt nicht -> BucherListe");
-          });
-      });
+      this.http.get(`http://localhost:3000/mail/kunde/rechnung/${id}`, {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      }).subscribe();
+  }
+
+  emailLeistungstraeger(rechnungsId: string, leistungsId: string) {
+    this.http.get(`http://localhost:3000/mail/ltt/${leistungsId}/rechnung/${rechnungsId}`, {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      }).subscribe();
   }
 }

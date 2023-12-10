@@ -61,19 +61,22 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { KalkulationComponent } from './kalkulation/kalkulation.component';
 import { RechnungssuchenComponent } from './rechnungssuchen/rechnungssuchen.component';
 import { DatenbankuebersichtComponent } from './datenbankuebersicht/datenbankuebersicht.component';
+import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
+import { NonAuthGuard } from './non-auth.guard';
 
 
 const meineRouten: Routes = [
-  { path: "neueBuchung", component: NeueBuchungComponent },
-  { path: "finden", component: BuchungfindenComponent },
-  { path: "uebersicht", component: BuchungsuebersichtComponent },
-  { path: "", component: StartseiteComponent },
-  { path: "startseite", component: StartseiteComponent },
-  { path: "rg", component: RechnungenComponent },
-  { path: "kalk", component: KalkulationComponent },
-  { path: "daten", component: DatenbankuebersichtComponent },
-]; //Array von Routen
-
+  { path: "neueBuchung", component: NeueBuchungComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] }, // Verwenden Sie NonAuthGuard für die Login-Seite
+  { path: "finden", component: BuchungfindenComponent, canActivate: [AuthGuard] },
+  { path: "uebersicht", component: BuchungsuebersichtComponent, canActivate: [AuthGuard] },
+  { path: "", component: StartseiteComponent, canActivate: [AuthGuard] },
+  { path: "startseite", component: StartseiteComponent, canActivate: [AuthGuard] },
+  { path: "rg", component: RechnungenComponent, canActivate: [AuthGuard] },
+  { path: "kalk", component: KalkulationComponent, canActivate: [AuthGuard] },
+  { path: "daten", component: DatenbankuebersichtComponent, canActivate: [AuthGuard] },
+];
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -86,7 +89,8 @@ const meineRouten: Routes = [
     RechnungenComponent,
     KalkulationComponent,
     RechnungssuchenComponent,
-    DatenbankuebersichtComponent
+    DatenbankuebersichtComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(meineRouten),

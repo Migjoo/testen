@@ -44,7 +44,12 @@ nextPage(){
     let test = this.filterVariable.nativeElement.value;
     let zwischenspeicher: Rechnung[] = [];
   for(let i of this.liste) {
-    if(i.ID.includes(test) || i.kunde.includes(test)) {
+    if(i.ID.includes(test) || i.kunde.includes(test) || i.anschriftKunde.includes(test) || i.anbieter.Bucher.includes(test)
+    
+    
+    
+    
+    ) {
      zwischenspeicher.push(i);
    }
   }

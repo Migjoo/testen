@@ -59,7 +59,6 @@ import { RechnungenComponent } from './rechnungen/rechnungen.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { KalkulationComponent } from './kalkulation/kalkulation.component';
-import { RechnungssuchenComponent } from './rechnungssuchen/rechnungssuchen.component';
 import { DatenbankuebersichtComponent } from './datenbankuebersicht/datenbankuebersicht.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
@@ -88,7 +87,6 @@ const meineRouten: Routes = [
     BuchungfindenComponent,
     RechnungenComponent,
     KalkulationComponent,
-    RechnungssuchenComponent,
     DatenbankuebersichtComponent,
     LoginComponent
   ],

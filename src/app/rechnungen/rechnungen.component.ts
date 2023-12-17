@@ -44,7 +44,7 @@ nextPage(){
     let test = this.filterVariable.nativeElement.value;
     let zwischenspeicher: Rechnung[] = [];
   for(let i of this.liste) {
-    if(i.ID.includes(test) || i.kunde.includes(test) || i.anschriftKunde.includes(test) || i.anbieter.Bucher.includes(test)
+    if(i.ID.includes(test) || i.kunde.includes(test)
     
     
     
@@ -76,7 +76,7 @@ nextPage(){
     this.daten.rechnungPDF(i.ID).then((res)=>{
     console.log("Objekt:" +res);
     const file = new Blob([res], { type: 'application/pdf' });
-    const fileURL = `http://localhost:3000/static/${i.rechnungsnummer}.pdf`;
+    const fileURL = `${this.daten.baseUrl}/static/${i.rechnungsnummer}.pdf`;
     window.open(fileURL, '_blank');
     });
     }

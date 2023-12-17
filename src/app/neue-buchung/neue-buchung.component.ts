@@ -242,10 +242,9 @@ this.offen();
     const id = this.rechnung!.ID;
     this.daten.rechnungPDF(id).then((res)=>{
     console.log("Objekt:" +res);
-    /* const file = new Blob([res], { type: 'application/pdf' });
-    const fileURL = `http://localhost:3000/rechnung/${id}/pdf`; */
-    window.open(`http://localhost:3000/rechnung/${id}/pdf`, '_blank');
-    });
+
+    window.open(`${this.daten.baseUrl}/rechnung/${id}/pdf`, '_blank');
+  });
     }
     sendeMailAnKunde(){
       console.log('email senden mit ' + this.rechnung!.ID);
@@ -259,7 +258,7 @@ this.offen();
       //'ltt/:leistungsId/rechnung/:rechnungId'
       const idRg = this.rechnung!.ID;
     
-      window.open(`http://localhost:3000/rechnung/${idRg}/voucher/${leistungsId}`, '_blank');
+      window.open(`${this.daten.baseUrl}/rechnung/${idRg}/voucher/${leistungsId}`, '_blank');
     }
 
   title = 'gustavo';
